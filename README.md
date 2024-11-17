@@ -412,7 +412,9 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
 
 - **Akurasi (Accuracy)**: 100.00%
   - **Rumus**:
-     Akurasi = (True Positives + True Negatives) / Total Prediksi
+      $$
+      \text{Akurasi} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Prediksi}}
+      $$
     
   - **Penjelasan**: Akurasi yang sangat tinggi menunjukkan bahwa sebagian besar rekomendasi yang dihasilkan oleh model adalah benar (artinya model dapat memprediksi dengan benar mayoritas item yang relevan bagi pengguna). Namun, meskipun akurasi tinggi, ini bisa menipu karena banyak dari rekomendasi tersebut tidak relevan. Artinya, akurasi yang tinggi tidak selalu berarti kualitas rekomendasi yang baik.
  
@@ -435,13 +437,13 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
   - **Loss**: 0.7016
   - **RMSE**: 0.3291
   - **Rumus RMSE (Root Mean Squared Error)**:  
-    
-    RMSE = sqrt( (1/n) * Σ( (r̂_i - r_i)² ) )
-    
-    Di mana:
-    - r̂_i adalah nilai yang diprediksi
-    - r_i adalah nilai yang sebenarnya
-    - n adalah jumlah data yang diuji
+       
+   RMSE = sqrt((1/n) * Σ (r̂ᵢ - rᵢ)²)
+   
+   Di mana:
+   - r̂ᵢ adalah nilai yang diprediksi
+   - rᵢ adalah nilai yang sebenarnya
+   - n adalah jumlah data yang diuji
 
   - **Penjelasan**: Pada tahap awal pelatihan, model mengalami penurunan signifikan dalam loss dan RMSE. Ini menunjukkan bahwa model mulai belajar dengan baik, tetapi tingkat kesalahan masih cukup tinggi. Namun, penurunan yang cepat mengindikasikan bahwa model mulai mengenali pola dalam data interaksi pengguna-item.
   
