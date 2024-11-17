@@ -368,141 +368,98 @@ Pada proyek ini, dua pendekatan **Content-Based Filtering** dan **Collaborative 
 Kedua pendekatan ini dapat saling melengkapi untuk meningkatkan kualitas rekomendasi dalam sistem yang lebih kompleks.
 
 ## Evaluation
-Berikut adalah **penjelasan dan kode evaluasi** untuk bagian **Content-Based Filtering (CBF)** dan **Collaborative Filtering (CF)**, sesuai dengan yang Anda inginkan, beserta penjelasan metrik evaluasi yang digunakan.
+
+Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **Content-Based Filtering** dan **Collaborative Filtering** dengan menggunakan model neural network. Perbandingan ini didasarkan pada kinerja yang diukur melalui metrik seperti **presisi**, **akurasi**, **loss**, **RMSE**, serta kelebihan dan kekurangan masing-masing metode.
 
 ---
 
-## Evaluation
+#### 1. **Content-Based Filtering**
 
-Pada bagian ini, kita akan membahas metrik evaluasi yang digunakan untuk mengevaluasi kinerja sistem rekomendasi berdasarkan dua pendekatan yang diterapkan: **Content-Based Filtering (CBF)** dan **Collaborative Filtering (CF)**. Evaluasi dilakukan dengan tujuan untuk memahami sejauh mana sistem ini berhasil memberikan rekomendasi yang relevan dan memadai kepada pengguna.
+**Metrik Evaluasi:**
+- **Presisi (Precision)**: 25.00%
+  - **Rumus**: 
+    \[
+    \text{Presisi} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
+    \]
+  - **Penjelasan**: Presisi mengukur seberapa banyak rekomendasi yang diberikan model yang benar-benar relevan. Nilai presisi yang rendah (25%) menunjukkan bahwa meskipun model memberikan banyak rekomendasi yang tepat (akurat), sebagian besar rekomendasi tersebut tidak sesuai dengan preferensi pengguna. Model ini mungkin terlalu banyak memberikan rekomendasi yang kurang sesuai dengan pengguna karena tidak dapat menangkap seluruh preferensi pengguna secara mendalam.
+  
+- **Akurasi (Accuracy)**: 100.00%
+  - **Rumus**:
+    \[
+    \text{Akurasi} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Prediksi}}
+    \]
+  - **Penjelasan**: Akurasi yang sangat tinggi menunjukkan bahwa sebagian besar rekomendasi yang dihasilkan oleh model adalah benar (artinya model dapat memprediksi dengan benar mayoritas item yang relevan bagi pengguna). Namun, meskipun akurasi tinggi, ini bisa menipu karena banyak dari rekomendasi tersebut tidak relevan. Artinya, akurasi yang tinggi tidak selalu berarti kualitas rekomendasi yang baik.
 
-### Metrik Evaluasi
-
-Untuk mengevaluasi sistem rekomendasi ini, kita menggunakan dua metrik yang umum digunakan dalam sistem rekomendasi: **Precision@k** dan **Recall@k**. Kedua metrik ini mengukur seberapa baik sistem dalam memberikan rekomendasi yang relevan, dengan fokus pada pengukuran kinerja untuk sejumlah rekomendasi teratas (Top-N recommendations).
-
-#### 1. **Precision@k**
-**Precision** mengukur proporsi item yang relevan di antara item yang direkomendasikan oleh sistem. Precision@k mengukur seberapa banyak dari `k` rekomendasi teratas yang diberikan kepada pengguna yang sebenarnya relevan atau disukai oleh pengguna. Semakin tinggi nilai precision, semakin baik rekomendasi yang diberikan oleh sistem.
-
-- **Formula Precision@k:**
-  \[
-  \text{Precision@k} = \frac{\text{Jumlah rekomendasi relevan di top-k}}{k}
-  \]
-
-- **Penjelasan:** Jika sistem memberikan `k` rekomendasi, precision@k mengukur berapa banyak dari `k` rekomendasi yang relevan atau disukai oleh pengguna.
-
-#### 2. **Recall@k**
-**Recall** mengukur proporsi item yang relevan yang berhasil ditemukan di antara semua item yang relevan yang seharusnya diberikan sebagai rekomendasi. Recall@k mengukur kemampuan sistem untuk menemukan semua rekomendasi yang relevan.
-
-- **Formula Recall@k:**
-  \[
-  \text{Recall@k} = \frac{\text{Jumlah rekomendasi relevan di top-k}}{\text{Jumlah total item relevan yang seharusnya diberikan}}
-  \]
-
-- **Penjelasan:** Recall mengukur seberapa baik sistem dapat menemukan item relevan yang seharusnya direkomendasikan kepada pengguna. Jika recall tinggi, berarti sistem berhasil memberikan banyak item relevan meskipun tidak semua.
-
-#### 3. **Root Mean Squared Error (RMSE)**
-Pada **Collaborative Filtering** menggunakan model **RecommenderNet**, kita juga menggunakan **RMSE** untuk mengukur akurasi prediksi rating yang diberikan oleh model. **RMSE** mengukur perbedaan rata-rata antara rating yang diprediksi dan rating yang sebenarnya, yang memberikan gambaran tentang seberapa akurat model dalam memprediksi preferensi pengguna.
-
-- **Formula RMSE:**
-  \[
-  \text{RMSE} = \sqrt{\frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2}
-  \]
-  Di mana:
-  - \(y_i\) adalah rating asli yang diberikan oleh pengguna.
-  - \(\hat{y}_i\) adalah rating yang diprediksi oleh model.
-  - \(N\) adalah jumlah total rating.
-
-- **Penjelasan:** RMSE mengukur seberapa besar perbedaan antara prediksi rating dan rating yang sebenarnya, dengan semakin kecil nilai RMSE menunjukkan semakin baik akurasi model.
+**Analisis Kelebihan dan Kekurangan:**
+- **Kelebihan**: 
+  - Akurasi yang sangat tinggi menunjukkan bahwa model dapat memilih item yang tepat berdasarkan fitur konten yang ada. 
+  - Tidak tergantung pada data interaksi antar pengguna, sehingga cocok untuk situasi di mana data interaksi pengguna tidak lengkap atau tidak tersedia.
+  
+- **Kekurangan**:
+  - **Presisi rendah** menunjukkan bahwa meskipun akurasi tinggi, banyak rekomendasi yang tidak sesuai dengan preferensi pengguna. Hal ini menandakan bahwa meskipun model mengenali konten yang relevan, model kurang efisien dalam memahami keinginan pengguna secara lebih pribadi.
+  - Mengandalkan fitur konten yang ada, yang bisa terbatas jika tidak ada informasi cukup tentang item atau pengguna.
 
 ---
 
-### Evaluasi Content-Based Filtering
+#### 2. **Collaborative Filtering (Neural Network)**
 
-Untuk **Content-Based Filtering**, evaluasi dilakukan dengan menghitung **Precision@k** dan **Recall@k** berdasarkan rekomendasi yang diberikan kepada pengguna. Misalnya, jika pengguna mencari makanan dengan kata kunci tertentu, sistem memberikan 10 rekomendasi teratas, dan kita mengukur seberapa banyak dari rekomendasi tersebut yang relevan dengan preferensi pengguna.
+**Metrik Evaluasi:**
+- **Epoch 1–5**:
+  - **Loss**: 0.7016
+  - **RMSE**: 0.3291
+  - **Rumus RMSE (Root Mean Squared Error)**:
+    \[
+    \text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (\hat{r}_i - r_i)^2}
+    \]
+    Di mana:
+    - \( \hat{r}_i \) adalah nilai yang diprediksi
+    - \( r_i \) adalah nilai yang sebenarnya
+    - \( n \) adalah jumlah data yang diuji
+  - **Penjelasan**: Pada tahap awal pelatihan, model mengalami penurunan signifikan dalam loss dan RMSE. Ini menunjukkan bahwa model mulai belajar dengan baik, tetapi tingkat kesalahan masih cukup tinggi. Namun, penurunan yang cepat mengindikasikan bahwa model mulai mengenali pola dalam data interaksi pengguna-item.
+  
+- **Epoch 10–20**:
+  - Model menunjukkan penurunan yang lebih stabil pada loss dan RMSE, baik pada data pelatihan maupun validasi. Ini menandakan bahwa model mulai beradaptasi dengan data dan menghindari overfitting.
+  
+- **Epoch 30–50**:
+  - Nilai loss dan RMSE semakin stabil, yang menunjukkan bahwa model mendekati konvergensi dan hasil mulai mencapai titik optimal pada parameter yang dipelajari.
+  
+- **Epoch 50–100**:
+  - Setelah epoch ke-50, penurunan loss dan RMSE semakin lambat, yang menunjukkan bahwa model telah mencapai kapasitas optimalnya dalam belajar dari data, dan meskipun ada sedikit fluktuasi, performa sudah cukup stabil.
 
-**Contoh Evaluasi Precision@k dan Recall@k pada Content-Based Filtering:**
-
-1. Misalkan sistem memberikan 10 rekomendasi makanan berdasarkan nama atau kategori.
-2. Kita menghitung seberapa banyak dari 10 rekomendasi tersebut yang relevan atau disukai oleh pengguna.
-3. Precision@k dapat dihitung sebagai rasio rekomendasi yang relevan terhadap total rekomendasi, sedangkan Recall@k mengukur seberapa banyak item relevan yang dapat ditemukan dari seluruh makanan relevan.
-
-Misalnya, jika ada 10 makanan yang direkomendasikan dan 6 di antaranya disukai pengguna, maka Precision@10 adalah 6/10 = 0.6.
-
-Untuk menghitung **Precision@k** dan **Recall@k**, Anda dapat menggunakan kode seperti berikut:
-
-```python
-def precision_at_k(recommended_items, relevant_items, k):
-    recommended_items = recommended_items[:k]  # Ambil k rekomendasi teratas
-    relevant_recommendations = [item for item in recommended_items if item in relevant_items]
-    return len(relevant_recommendations) / k
-
-def recall_at_k(recommended_items, relevant_items, k):
-    recommended_items = recommended_items[:k]  # Ambil k rekomendasi teratas
-    relevant_recommendations = [item for item in recommended_items if item in relevant_items]
-    return len(relevant_recommendations) / len(relevant_items)  # Dibandingkan dengan semua item relevan
-
-# Misalnya, untuk rekomendasi dan relevansi:
-recommended_items = ['pizza', 'burger', 'sushi', 'pasta', 'salad', 'steak', 'tacos', 'noodles', 'curry', 'dumplings']
-relevant_items = ['burger', 'pasta', 'salad', 'noodles', 'pizza']  # Makanan yang relevan menurut pengguna
-
-# Tentukan k
-k = 5
-
-# Menghitung Precision@k dan Recall@k
-precision = precision_at_k(recommended_items, relevant_items, k)
-recall = recall_at_k(recommended_items, relevant_items, k)
-
-print(f"Precision@{k}: {precision:.4f}")
-print(f"Recall@{k}: {recall:.4f}")
-```
+**Analisis Kelebihan dan Kekurangan:**
+- **Kelebihan**:
+  - **RMSE yang stabil** dan penurunan loss yang konsisten menunjukkan bahwa model cukup baik dalam mempelajari pola interaksi antara pengguna dan item. Ini penting untuk model berbasis collaborative filtering, karena dapat memberikan rekomendasi berdasarkan interaksi antar pengguna.
+  - Menggunakan neural network memberikan fleksibilitas dan potensi yang lebih tinggi dalam menangkap pola-pola non-linier dalam data, terutama ketika data interaksi yang ada cukup besar.
+  
+- **Kekurangan**:
+  - **Penurunan yang lambat** setelah epoch ke-50 bisa menunjukkan bahwa model mulai mencapai batas kemampuan dalam hal belajar dari data yang ada. Ini bisa mengindikasikan bahwa model memerlukan lebih banyak data atau tuning parameter untuk mencapai hasil yang lebih baik.
+  - **Kecepatan konvergensi** yang lambat bisa menjadi masalah, terutama jika dibutuhkan model yang cepat beradaptasi dengan data baru.
 
 ---
 
-### Evaluasi Collaborative Filtering
+### **Perbandingan dan Kesimpulan**
 
-Untuk **Collaborative Filtering**, evaluasi dilakukan dengan mengukur **Root Mean Squared Error (RMSE)** antara rating yang diprediksi oleh model dan rating yang sebenarnya diberikan oleh pengguna. Model Collaborative Filtering menggunakan jaringan saraf untuk memprediksi rating pengguna terhadap makanan tertentu. Dengan meminimalkan RMSE, kita dapat mengevaluasi seberapa akurat model ini dalam memprediksi preferensi pengguna.
+1. **Content-Based Filtering**:
+   - **Kelebihan**:
+     - Dapat memberikan rekomendasi yang relevan berdasarkan fitur konten item, meskipun tidak membutuhkan data interaksi pengguna.
+   - **Kekurangan**:
+     - Meskipun memiliki akurasi tinggi, presisi yang rendah menunjukkan bahwa model sering memberikan rekomendasi yang tidak sesuai dengan preferensi pengguna, karena tidak mempertimbangkan hubungan antara pengguna.
+     - Model ini bergantung sepenuhnya pada fitur konten, yang bisa terbatas jika data konten tidak cukup informatif.
+   
+2. **Collaborative Filtering (Neural Network)**:
+   - **Kelebihan**:
+     - Collaborative filtering berbasis neural network sangat efektif dalam menangkap pola-pola yang ada di antara pengguna dan item, serta lebih personal dalam memberikan rekomendasi, terutama dengan data interaksi yang lebih kaya.
+     - **RMSE yang stabil** dan **penurunan loss yang konsisten** menunjukkan bahwa model ini dapat memberikan rekomendasi yang lebih akurat dan relevan dibandingkan dengan content-based filtering.
+   - **Kekurangan**:
+     - Kecepatan konvergensi yang lambat setelah sejumlah epoch menunjukkan bahwa model ini mungkin membutuhkan lebih banyak data atau perlu dioptimalkan lebih lanjut untuk meningkatkan kinerjanya.
+     - Penurunan performa setelah epoch tertentu bisa menunjukkan bahwa model mencapai titik jenuh dalam pembelajaran, yang menunjukkan adanya batasan dalam jumlah data atau tuning yang dilakukan.
 
-**Contoh Evaluasi RMSE pada Collaborative Filtering:**
+### **Kesimpulan Akhir**:
+- **Content-Based Filtering** dapat menghasilkan akurasi yang sangat tinggi, tetapi presisi yang rendah menunjukkan bahwa model ini mungkin terlalu menghasilkan banyak rekomendasi yang tidak relevan bagi pengguna. Oleh karena itu, untuk memperbaiki presisi, perlu ada penyesuaian dalam pemilihan fitur atau metode lain seperti penyesuaian bobot fitur.
+  
+- **Collaborative Filtering** (terutama dengan neural network) cenderung memberikan rekomendasi yang lebih personal dan relevan, meskipun konvergensi model relatif lambat dan membutuhkan optimisasi lebih lanjut. Pendekatan ini lebih sesuai untuk memberikan rekomendasi yang lebih tepat, tetapi mungkin membutuhkan lebih banyak data atau waktu pelatihan yang lebih lama untuk mencapai performa optimal.
 
-1. Setelah model dilatih, kita melakukan prediksi rating untuk data pengguna yang belum memberikan rating.
-2. Rating yang diprediksi dibandingkan dengan rating asli yang diberikan oleh pengguna.
-3. RMSE dihitung untuk mengukur kesalahan antara prediksi dan rating asli.
-
-```python
-# Evaluasi RMSE menggunakan data pelatihan dan validasi
-train_rmse = model.evaluate(x_train, y_train, verbose=0)
-val_rmse = model.evaluate(x_val, y_val, verbose=0)
-
-print(f"Train RMSE: {train_rmse[1]:.4f}")
-print(f"Validation RMSE: {val_rmse[1]:.4f}")
-```
-
-Jika RMSE bernilai 0.2, artinya rata-rata kesalahan prediksi rating adalah 0.2, yang menunjukkan bahwa model cukup akurat dalam memprediksi rating pengguna.
-
----
-
-### Hasil Evaluasi
-
-1. **Content-Based Filtering**: 
-   - Setelah menghitung Precision@k dan Recall@k, kita mendapatkan hasil yang menunjukkan bahwa sistem dapat memberikan rekomendasi yang cukup relevan, tetapi dengan keterbatasan dalam hal variasi makanan yang disarankan.
-   - **Precision@10** = 0.75 dan **Recall@10** = 0.65, yang menunjukkan bahwa sebagian besar rekomendasi yang diberikan sesuai dengan preferensi pengguna, namun masih ada ruang untuk meningkatkan variasi dalam rekomendasi yang diberikan.
-
-2. **Collaborative Filtering**:
-   - Setelah melatih model menggunakan Neural Collaborative Filtering dan menghitung **RMSE**, kita mendapatkan **RMSE = 0.32**, yang menunjukkan bahwa prediksi rating model cukup akurat dalam menilai preferensi pengguna.
-   - Dengan adanya data interaksi pengguna yang lebih banyak, model ini dapat memberikan rekomendasi yang lebih beragam dan berdasarkan pola preferensi yang lebih kuat, meskipun tetap menghadapi masalah **cold-start** bagi pengguna baru.
-
----
-
-### Kesimpulan
-
-Berdasarkan hasil evaluasi, kedua pendekatan memiliki kelebihan dan kekurangan:
-
-- **Content-Based Filtering** efektif dalam memberikan rekomendasi yang relevan berdasarkan deskripsi dan kategori makanan, namun terbatas dalam hal variasi dan diversifikasi rekomendasi.
-- **Collaborative Filtering** lebih unggul dalam memberikan rekomendasi yang beragam dan berpotensi lebih akurat, meskipun memerlukan data interaksi pengguna yang lebih banyak dan menghadapi masalah pada pengguna baru.
-
-Dalam implementasi nyata, kedua metode ini bisa digunakan secara bersamaan (misalnya, **Hybrid Approach**) untuk mengatasi kekurangan masing-masing dan memberikan rekomendasi yang lebih lengkap dan akurat.
-
----
+Secara keseluruhan, jika tujuan adalah memberikan rekomendasi yang lebih personal dan relevan, **Collaborative Filtering** lebih unggul. Namun, **Content-Based Filtering** masih dapat berguna dalam situasi di mana data interaksi pengguna terbatas atau tidak tersedia.
 
 **---Ini adalah bagian akhir laporan---**
 
