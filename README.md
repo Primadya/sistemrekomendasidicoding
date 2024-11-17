@@ -15,26 +15,26 @@ Proyek ini penting karena dapat meningkatkan pengalaman pengguna dalam memilih m
 
 Dalam pengembangan sistem rekomendasi makanan, terdapat beberapa tantangan yang harus diselesaikan untuk memastikan pengalaman pengguna yang lebih baik dan kinerja bisnis yang lebih optimal. Berikut adalah beberapa pernyataan masalah yang relevan:
 
-1. Pengguna kesulitan menemukan makanan yang sesuai dengan selera mereka di antara banyaknya pilihan yang tersedia.**
+1. Pengguna kesulitan menemukan makanan yang sesuai dengan selera mereka di antara banyaknya pilihan yang tersedia.
    - Banyaknya pilihan makanan yang tersedia sering kali membuat pengguna merasa kebingungan atau terjebak dalam proses pencarian yang memakan waktu. Tanpa sistem yang membantu menyaring dan memberikan rekomendasi yang relevan, pengguna mungkin merasa frustrasi dan akhirnya memilih untuk tidak melanjutkan pencarian atau bahkan tidak melakukan pemesanan.
 
-2. Pengguna yang mencari makanan berdasarkan jenis atau kategori tertentu (seperti makanan Chinese, Thai, atau Mexican) kesulitan menemukan pilihan yang tepat.**
+2. Pengguna yang mencari makanan berdasarkan jenis atau kategori tertentu (seperti makanan Chinese, Thai, atau Mexican) kesulitan menemukan pilihan yang tepat.
    - Meskipun ada berbagai jenis makanan berdasarkan kategori tertentu, tanpa sistem yang bisa menyaring makanan berdasarkan jenis atau kategori ini, pengguna harus menelusuri banyak pilihan untuk menemukan makanan yang sesuai dengan keinginan mereka. Hal ini bisa memperlambat proses pemilihan makanan dan menurunkan kepuasan pengguna.
 
-3. Platform kuliner kesulitan dalam memperkenalkan variasi atau makanan baru kepada pengguna yang sudah terbiasa dengan pilihan tertentu.**
+3. Platform kuliner kesulitan dalam memperkenalkan variasi atau makanan baru kepada pengguna yang sudah terbiasa dengan pilihan tertentu.
    - Restoran atau platform pengantaran makanan sering kali kesulitan untuk mempromosikan makanan baru atau variasi menu yang belum dikenal oleh pengguna. Tanpa rekomendasi yang cerdas, pengguna mungkin terus memilih makanan yang sama berulang-ulang dan tidak terbuka untuk mencoba variasi baru.
 
 ### Goals
 
 Tujuan dari proyek ini adalah untuk membangun sistem rekomendasi yang dapat mengatasi pernyataan masalah di atas dan memberikan manfaat lebih bagi pengguna dan bisnis kuliner. Berikut adalah beberapa tujuan yang ingin dicapai:
 
-1. Membantu pengguna menemukan makanan yang sesuai dengan selera mereka secara lebih efisien dan relevan.**
+1. Membantu pengguna menemukan makanan yang sesuai dengan selera mereka secara lebih efisien dan relevan.
    - Sistem rekomendasi akan menyaring pilihan makanan berdasarkan input yang diberikan oleh pengguna, seperti nama makanan atau jenis makanan (misalnya Chinese, Thai, atau Mexican), sehingga pengguna dapat dengan cepat menemukan makanan yang sesuai dengan preferensi mereka tanpa harus mencari secara manual.
 
-2. Menyediakan rekomendasi makanan berdasarkan kategori atau jenis tertentu, seperti Chinese, Thai, atau Mexican, untuk memudahkan pencarian.**
+2. Menyediakan rekomendasi makanan berdasarkan kategori atau jenis tertentu, seperti Chinese, Thai, atau Mexican, untuk memudahkan pencarian.
    - Dengan memungkinkan pengguna untuk mencari makanan berdasarkan kategori atau jenis yang lebih spesifik, sistem ini akan mempercepat pencarian dan membantu pengguna menemukan makanan yang mereka inginkan dengan lebih mudah dan tanpa kerumitan.
 
-3. Meningkatkan engagement dengan memberikan rekomendasi yang lebih personal dan memperkenalkan variasi atau makanan baru yang relevan.**
+3. Meningkatkan engagement dengan memberikan rekomendasi yang lebih personal dan memperkenalkan variasi atau makanan baru yang relevan.
    - Sistem ini akan mendorong pengguna untuk mencoba makanan baru berdasarkan jenis atau kategori makanan yang sudah mereka pilih sebelumnya, sehingga meningkatkan variasi pemilihan makanan dan mempromosikan makanan baru atau menu yang jarang dipilih.
 
 ### Solution Approach
@@ -404,17 +404,16 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
 **Metrik Evaluasi:**
 
 - **Presisi (Precision)**: 25.00%
-  - **Rumus**: 
-    \[
-    \text{Presisi} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
-    \]
+  - **Rumus**:
+    
+    Presisi = True Positives / (True Positives + False Positives)
+
   - **Penjelasan**: Presisi mengukur seberapa banyak rekomendasi yang diberikan model yang benar-benar relevan. Nilai presisi yang rendah (25%) menunjukkan bahwa meskipun model memberikan banyak rekomendasi yang tepat (akurat), sebagian besar rekomendasi tersebut tidak sesuai dengan preferensi pengguna. Model ini mungkin terlalu banyak memberikan rekomendasi yang kurang sesuai dengan pengguna karena tidak dapat menangkap seluruh preferensi pengguna secara mendalam.
 
 - **Akurasi (Accuracy)**: 100.00%
   - **Rumus**:
-    \[
-    \text{Akurasi} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Prediksi}}
-    \]
+     Akurasi = (True Positives + True Negatives) / Total Prediksi
+    
   - **Penjelasan**: Akurasi yang sangat tinggi menunjukkan bahwa sebagian besar rekomendasi yang dihasilkan oleh model adalah benar (artinya model dapat memprediksi dengan benar mayoritas item yang relevan bagi pengguna). Namun, meskipun akurasi tinggi, ini bisa menipu karena banyak dari rekomendasi tersebut tidak relevan. Artinya, akurasi yang tinggi tidak selalu berarti kualitas rekomendasi yang baik.
  
 **Analisis Kelebihan dan Kekurangan:**
@@ -435,14 +434,15 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
 - **Epoch 1–5**:
   - **Loss**: 0.7016
   - **RMSE**: 0.3291
-  - **Rumus RMSE (Root Mean Squared Error)**:
-    \[
-    \text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (\hat{r}_i - r_i)^2}
-    \]
+  - **Rumus RMSE (Root Mean Squared Error)**:  
+    
+    RMSE = sqrt( (1/n) * Σ( (r̂_i - r_i)² ) )
+    
     Di mana:
-    - \( \hat{r}_i \) adalah nilai yang diprediksi
-    - \( r_i \) adalah nilai yang sebenarnya
-    - \( n \) adalah jumlah data yang diuji
+    - r̂_i adalah nilai yang diprediksi
+    - r_i adalah nilai yang sebenarnya
+    - n adalah jumlah data yang diuji
+
   - **Penjelasan**: Pada tahap awal pelatihan, model mengalami penurunan signifikan dalam loss dan RMSE. Ini menunjukkan bahwa model mulai belajar dengan baik, tetapi tingkat kesalahan masih cukup tinggi. Namun, penurunan yang cepat mengindikasikan bahwa model mulai mengenali pola dalam data interaksi pengguna-item.
   
 - **Epoch 10–20**:
