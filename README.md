@@ -406,7 +406,8 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
 - **Presisi (Precision)**: 25.00%
   - **Rumus**:
     
-    Presisi = True Positives / (True Positives + False Positives)
+    ![Presisi Formula](https://latex.codecogs.com/svg.latex?\text{Presisi}%20=%20\frac{\text{True%20Positives}}{\text{True%20Positives}%20+%20\text{False%20Positives}})
+
 
   - **Penjelasan**: Presisi mengukur seberapa banyak rekomendasi yang diberikan model yang benar-benar relevan. Nilai presisi yang rendah (25%) menunjukkan bahwa meskipun model memberikan banyak rekomendasi yang tepat (akurat), sebagian besar rekomendasi tersebut tidak sesuai dengan preferensi pengguna. Model ini mungkin terlalu banyak memberikan rekomendasi yang kurang sesuai dengan pengguna karena tidak dapat menangkap seluruh preferensi pengguna secara mendalam.
 
@@ -438,7 +439,8 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
   - **RMSE**: 0.3291
   - **Rumus RMSE (Root Mean Squared Error)**:  
        
-   RMSE = sqrt((1/n) * Σ (r̂ᵢ - rᵢ)²)
+   ![RMSE Formula](https://latex.codecogs.com/svg.latex?RMSE%20%3D%20%5Csqrt%7B%5Cfrac%7B1%7D%7Bn%7D%5Csum%20%28%5Chat%7Br%7D_i%20-%20r_i%29%5E2%7D)
+
    
    Di mana:
    - r̂ᵢ adalah nilai yang diprediksi
