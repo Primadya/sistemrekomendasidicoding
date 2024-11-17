@@ -1,5 +1,8 @@
 # Laporan Proyek Machine Learning - Nauval Dwi Primadya
 
+<div align="justify">
+
+   
 ## Project Overview
 
 Dalam dunia kuliner yang terus berkembang, konsumen dihadapkan pada pilihan makanan yang semakin banyak, baik di restoran maupun melalui platform layanan pengantaran makanan. Hal ini membuat proses pemilihan makanan seringkali menjadi tugas yang membingungkan [[1](https://www.aasmr.org/jsms/Vol13/No.5/Vol.13%20No.5.10.pdf)]. Sistem rekomendasi makanan yang akurat dan relevan dapat membantu pengguna menemukan pilihan yang sesuai dengan preferensi mereka secara efisien. Metode **Content-Based Filtering** dan **Collaborative Filtering** adalah dua teknik utama yang digunakan untuk membangun sistem rekomendasi makanan yang efektif. Content-Based Filtering berfokus pada kesamaan antara makanan berdasarkan atribut seperti jenis, bahan, dan deskripsi makanan, sementara Collaborative Filtering memanfaatkan data interaksi pengguna lain untuk memberikan rekomendasi berdasarkan pola kesamaan preferensi. Kombinasi kedua metode ini dapat menghasilkan rekomendasi yang lebih akurat dan personal, memberikan pengalaman yang lebih baik bagi pengguna dalam memilih makanan yang sesuai dengan selera mereka [[2](https://www.proquest.com/openview/231c3bcbc225e7beb2b2a8bceb903a8f/1?pq-origsite=gscholar&cbl=5314840)].
@@ -38,18 +41,21 @@ Tujuan dari proyek ini adalah untuk membangun sistem rekomendasi yang dapat meng
 
 Untuk mencapai tujuan di atas, ada beberapa pendekatan yang dapat digunakan dalam sistem rekomendasi makanan ini. Berikut adalah solusi yang dapat diterapkan:
 
-#### 1. **Content-Based Filtering (Berbasis Konten)**
-   - **Deskripsi Solusi**: Menggunakan informasi tentang makanan seperti nama, jenis makanan (Chinese, Thai, Mexican), dan deskripsi untuk menemukan makanan yang mirip dengan makanan yang telah dipilih oleh pengguna. Sistem ini akan menghitung kesamaan antara makanan berdasarkan fitur-fitur tersebut.
-   - **Langkah Implementasi**:
-     1. Mengekstraksi fitur dari dataset, termasuk nama makanan, jenis, dan deskripsi.
-     2. Menghitung kesamaan antar makanan menggunakan teknik **Cosine Similarity** atau **TF-IDF**.
-     3. Memberikan rekomendasi berdasarkan makanan dengan kemiripan tertinggi dengan yang sudah dipilih atau dicari oleh pengguna.
+#### 1. **Content-Based Filtering (Berbasis Konten)**  
+   - **Deskripsi Solusi**: Sistem ini menggunakan informasi seperti nama, jenis makanan (Chinese, Thai, Mexican), dan deskripsi untuk memberikan rekomendasi berdasarkan kesamaan antar makanan. Data deskriptif diubah menjadi representasi numerik menggunakan teknik seperti **TF-IDF Vectorizer**, lalu dihitung kesamaannya menggunakan **Cosine Similarity** untuk menemukan makanan yang paling mirip dengan pilihan pengguna.  
+   - **Langkah Implementasi**:  
+     1. Mengekstraksi fitur dari dataset, seperti nama makanan, jenis, dan deskripsi.  
+     2. Mengubah fitur teks menjadi representasi numerik menggunakan **TF-IDF Vectorizer**.  
+     3. Menghitung kesamaan antar makanan menggunakan **Cosine Similarity**.  
+     4. Memberikan rekomendasi makanan yang memiliki kemiripan tertinggi dengan makanan pilihan pengguna.  
 
-#### 2. **Collaborative Filtering (Berbasis Pengguna)**
-   - **Deskripsi Solusi**: Menggunakan data interaksi pengguna, seperti makanan yang telah dipilih sebelumnya atau rating yang diberikan, untuk memberikan rekomendasi berdasarkan pola preferensi pengguna lain yang serupa.
-   - **Langkah Implementasi**:
-     1. Membuat **user-item interaction matrix** yang menunjukkan interaksi pengguna dengan makanan.
-     2. Menggunakan algoritma seperti **k-nearest neighbors (KNN)** atau **matrix factorization** untuk menemukan kesamaan antar pengguna dan memberikan rekomendasi berdasarkan makanan yang dipilih oleh pengguna lain dengan preferensi serupa.
+#### 2. **Collaborative Filtering (Berbasis Pengguna)**  
+   - **Deskripsi Solusi**: Pendekatan ini memanfaatkan data interaksi pengguna, seperti rating atau klik, untuk memprediksi preferensi makanan berdasarkan kesamaan antar pengguna. Model **RecommenderNet** digunakan untuk merepresentasikan pengguna dan makanan dalam bentuk embedding, memungkinkan deteksi hubungan non-linear melalui **dot product** dan bias tambahan.  
+   - **Langkah Implementasi**:  
+     1. Membuat **user-item interaction matrix** yang mencatat interaksi pengguna dengan makanan.  
+     2. Membuat model embedding untuk merepresentasikan pengguna dan makanan sebagai vektor berdimensi tetap menggunakan **RecommenderNet**.  
+     3. Melatih model dengan **Binary Crossentropy** menggunakan **Adam Optimizer** untuk memprediksi relevansi makanan terhadap pengguna.  
+     4. Memberikan rekomendasi makanan berdasarkan skor relevansi yang dihasilkan model.  
 
 Dengan pendekatan **Content-Based Filtering** dan **Collaborative Filtering**, sistem rekomendasi ini dapat membantu pengguna menemukan makanan yang sesuai dengan preferensi mereka, baik berdasarkan jenis atau kategori makanan yang mereka pilih (seperti Chinese, Thai, atau Mexican), maupun berdasarkan pola perilaku pengguna lain. Kedua metode ini memungkinkan sistem untuk memberikan rekomendasi yang lebih personal dan relevan, sehingga meningkatkan kepuasan pengguna dan membantu bisnis kuliner dalam memperkenalkan variasi makanan baru atau menu yang jarang dipilih.
 
@@ -72,6 +78,14 @@ Dataset yang digunakan dalam proyek ini terdiri dari dua tabel: **data makanan**
 
 ### Deskripsi Variabel
 
+1. **Tabel Makanan (`data`)**:
+   - **`food_id`**: ID unik untuk setiap makanan (integer).
+   - **`name`**: Nama makanan (string).
+   - **`c_type`**: Kategori makanan, seperti "Healthy Food", "Snack", "Dessert" (string).
+   - **`veg_non`**: Vegetarian atau non-vegetarian ("veg" atau "non-veg") (string).
+   - **`describe`**: Deskripsi bahan-bahan makanan (string).
+
+
 | food_id | name                     | c_type      | veg_non | describe                                                    |
 |---------|--------------------------|-------------|---------|-------------------------------------------------------------|
 | 0       | summer squash salad      | Healthy Food| veg     | white balsamic vinegar, lemon juice, lemon rind...          |
@@ -81,12 +95,10 @@ Dataset yang digunakan dalam proyek ini terdiri dari dua tabel: **data makanan**
 | 4       | christmas cake           | Dessert     | veg     | christmas dry fruits (pre-soaked), orange zest...          |
 
 
-1. **Tabel Makanan (`data`)**:
-   - **`food_id`**: ID unik untuk setiap makanan (integer).
-   - **`name`**: Nama makanan (string).
-   - **`c_type`**: Kategori makanan, seperti "Healthy Food", "Snack", "Dessert" (string).
-   - **`veg_non`**: Vegetarian atau non-vegetarian ("veg" atau "non-veg") (string).
-   - **`describe`**: Deskripsi bahan-bahan makanan (string).
+2. **Tabel Rating (`rating`)**:
+   - **`user_id`**: ID unik pengguna (angka desimal).
+   - **`food_id`**: ID unik makanan yang diberi rating (angka desimal).
+   - **`rating`**: Nilai rating yang diberikan oleh pengguna (1-10, angka desimal).
 
 
 | user_id | food_id | rating |
@@ -97,11 +109,6 @@ Dataset yang digunakan dalam proyek ini terdiri dari dua tabel: **data makanan**
 | 3       | 25.0    | 4.0    |
 | 4       | 49.0    | 1.0    |
 
-
-2. **Tabel Rating (`rating`)**:
-   - **`user_id`**: ID unik pengguna (angka desimal).
-   - **`food_id`**: ID unik makanan yang diberi rating (angka desimal).
-   - **`rating`**: Nilai rating yang diberikan oleh pengguna (1-10, angka desimal).
 
 ### Exploratory Data Analysis (EDA)
 
@@ -114,6 +121,8 @@ Dataset yang digunakan dalam proyek ini terdiri dari dua tabel: **data makanan**
    plt.xticks(rotation=90)
    plt.show()
    ```
+![Grafik Jumlah Jenis Makanan](https://github.com/Primadya/sistemrekomendasidicoding/blob/main/image/Screenshot%20from%202024-11-17%2014-49-46.png?raw=true)
+
 
 2. **Distribusi Vegan vs Non-Vegan (`veg_non`)**:
    - Menampilkan distribusi makanan vegan dan non-vegan dengan **bar plot** untuk mengetahui proporsi makanan berbasis tanaman atau hewan.
@@ -124,6 +133,8 @@ Dataset yang digunakan dalam proyek ini terdiri dari dua tabel: **data makanan**
    plt.xticks(rotation=90)
    plt.show()
    ```
+![Grafik Distribusi Vegan dan Non-Vegan](https://github.com/Primadya/sistemrekomendasidicoding/blob/main/image/Screenshot%20from%202024-11-17%2014-50-00.png?raw=true)
+
 
 3. **Distribusi Rating**:
    - Menghitung jumlah kemunculan setiap rating dan menampilkannya dalam **bar plot** untuk melihat bagaimana rating terdistribusi.
@@ -133,14 +144,9 @@ Dataset yang digunakan dalam proyek ini terdiri dari dua tabel: **data makanan**
    sns.countplot(data=rating, x=rating['rating'])
    plt.show()
    ```
-
-4. **Jumlah Data**:
-   - Menghitung jumlah kategori unik dalam **`c_type`** dan **`veg_non`** untuk mendapatkan wawasan tentang keragaman kategori makanan.
    
-   ```python
-   print('Jumlah Type: ', len(data['c_type'].unique()))
-   print('Jumlah Data: ', len(data['veg_non'].unique()))
-   ```
+![Grafik Distribusi Rating](https://github.com/Primadya/sistemrekomendasidicoding/blob/main/image/Screenshot%20from%202024-11-17%2014-50-10.png?raw=true)
+
 
 Melalui EDA, kita mendapatkan gambaran tentang distribusi jenis makanan dan rating pengguna, serta proporsi makanan vegan/non-vegan. Ini membantu dalam merancang sistem rekomendasi yang sesuai dengan preferensi pengguna dan memberikan wawasan tentang kategori makanan yang paling banyak atau kurang populer.
 
@@ -232,8 +238,6 @@ x_train, x_val, y_train, y_val = (
 ```
 
 **Alasan**: Pembagian data memungkinkan kita untuk melatih model menggunakan sebagian besar data dan menguji kinerja model pada data yang belum pernah dilihat sebelumnya, sehingga memberikan gambaran yang lebih realistis tentang kinerja model.
-
-### Kesimpulan
 
 Proses **Data Preparation** sangat krusial untuk memastikan kualitas dan konsistensi data yang digunakan dalam membangun model rekomendasi. Beberapa alasan pentingnya tahap-tahap ini adalah:
 
@@ -382,8 +386,6 @@ print(top_n_recommendations_collaborative)
 
 ---
 
-### Kesimpulan
-
 Pada proyek ini, dua pendekatan **Content-Based Filtering** dan **Collaborative Filtering** diterapkan untuk memberikan **Top-N Recommendations** bagi pengguna:
 
 1. **Content-Based Filtering** memberikan rekomendasi yang berbasis pada kesamaan konten, seperti deskripsi makanan atau kategori makanan. Ini berguna ketika data pengguna terbatas atau baru, tetapi terbatas pada variasi makanan yang ada.
@@ -400,20 +402,21 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
 #### 1. **Content-Based Filtering**
 
 **Metrik Evaluasi:**
+
 - **Presisi (Precision)**: 25.00%
   - **Rumus**: 
     \[
     \text{Presisi} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
     \]
   - **Penjelasan**: Presisi mengukur seberapa banyak rekomendasi yang diberikan model yang benar-benar relevan. Nilai presisi yang rendah (25%) menunjukkan bahwa meskipun model memberikan banyak rekomendasi yang tepat (akurat), sebagian besar rekomendasi tersebut tidak sesuai dengan preferensi pengguna. Model ini mungkin terlalu banyak memberikan rekomendasi yang kurang sesuai dengan pengguna karena tidak dapat menangkap seluruh preferensi pengguna secara mendalam.
-  
+
 - **Akurasi (Accuracy)**: 100.00%
   - **Rumus**:
     \[
     \text{Akurasi} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Prediksi}}
     \]
   - **Penjelasan**: Akurasi yang sangat tinggi menunjukkan bahwa sebagian besar rekomendasi yang dihasilkan oleh model adalah benar (artinya model dapat memprediksi dengan benar mayoritas item yang relevan bagi pengguna). Namun, meskipun akurasi tinggi, ini bisa menipu karena banyak dari rekomendasi tersebut tidak relevan. Artinya, akurasi yang tinggi tidak selalu berarti kualitas rekomendasi yang baik.
-
+ 
 **Analisis Kelebihan dan Kekurangan:**
 - **Kelebihan**: 
   - Akurasi yang sangat tinggi menunjukkan bahwa model dapat memilih item yang tepat berdasarkan fitur konten yang ada. 
@@ -428,6 +431,7 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
 #### 2. **Collaborative Filtering (Neural Network)**
 
 **Metrik Evaluasi:**
+
 - **Epoch 1–5**:
   - **Loss**: 0.7016
   - **RMSE**: 0.3291
@@ -478,15 +482,43 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
      - Kecepatan konvergensi yang lambat setelah sejumlah epoch menunjukkan bahwa model ini mungkin membutuhkan lebih banyak data atau perlu dioptimalkan lebih lanjut untuk meningkatkan kinerjanya.
      - Penurunan performa setelah epoch tertentu bisa menunjukkan bahwa model mencapai titik jenuh dalam pembelajaran, yang menunjukkan adanya batasan dalam jumlah data atau tuning yang dilakukan.
 
-### **Kesimpulan Akhir**:
+### **Kesimpulan Evaluasi**:
 - **Content-Based Filtering** dapat menghasilkan akurasi yang sangat tinggi, tetapi presisi yang rendah menunjukkan bahwa model ini mungkin terlalu menghasilkan banyak rekomendasi yang tidak relevan bagi pengguna. Oleh karena itu, untuk memperbaiki presisi, perlu ada penyesuaian dalam pemilihan fitur atau metode lain seperti penyesuaian bobot fitur.
   
 - **Collaborative Filtering** (terutama dengan neural network) cenderung memberikan rekomendasi yang lebih personal dan relevan, meskipun konvergensi model relatif lambat dan membutuhkan optimisasi lebih lanjut. Pendekatan ini lebih sesuai untuk memberikan rekomendasi yang lebih tepat, tetapi mungkin membutuhkan lebih banyak data atau waktu pelatihan yang lebih lama untuk mencapai performa optimal.
 
 Secara keseluruhan, jika tujuan adalah memberikan rekomendasi yang lebih personal dan relevan, **Collaborative Filtering** lebih unggul. Namun, **Content-Based Filtering** masih dapat berguna dalam situasi di mana data interaksi pengguna terbatas atau tidak tersedia.
 
-**---Ini adalah bagian akhir laporan---**
+## Diskusi Hasil Proyek 
+### Diskusi Hasil Proyek terhadap Problem Statement dan Goals  
 
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
+Hasil evaluasi model menunjukkan bahwa kombinasi metode **Content-Based Filtering** dan **Collaborative Filtering berbasis neural network** mampu mendukung pencapaian tujuan utama proyek ini. Sistem rekomendasi yang dihasilkan memberikan solusi efektif terhadap problem statement yang dihadapi, dengan manfaat sebagai berikut:  
+
+- **Membantu Pengguna Menemukan Makanan yang Sesuai dengan Selera**:  
+  Dengan presisi model yang terus meningkat dalam pendekatan Collaborative Filtering (RMSE stabil di 0.3291), pengguna dapat menerima rekomendasi makanan yang lebih personal dan relevan berdasarkan interaksi mereka sebelumnya. Ini secara langsung meningkatkan efisiensi pencarian makanan sesuai preferensi.  
+
+- **Menyediakan Rekomendasi Berdasarkan Kategori Makanan Tertentu**:  
+  Pendekatan Content-Based Filtering memungkinkan pengguna untuk menemukan makanan sesuai kategori atau atribut tertentu, seperti jenis masakan atau bahan. Meski presisi rendah (25%) menjadi kelemahan, model tetap berguna dalam menangani kebutuhan spesifik ini.  
+
+- **Memperkenalkan Variasi Makanan Baru**:  
+  Dengan pendekatan Content-Based Filtering, makanan baru dapat direkomendasikan berdasarkan kesamaan fitur dengan makanan lain yang sudah populer. Selain itu, Collaborative Filtering mendukung rekomendasi yang lebih relevan setelah interaksi pengguna terhadap makanan baru mulai tercatat.  
+
+### Manfaat Praktis Proyek  
+
+1. **Personalisasi Rekomendasi**:  
+   Pengguna dapat merasakan pengalaman yang lebih personal melalui rekomendasi makanan yang sesuai selera dan kebiasaan mereka. Hal ini mendorong keterlibatan pengguna lebih lanjut dengan platform.  
+
+2. **Efisiensi Pencarian Makanan**:  
+   Dengan sistem rekomendasi yang akurat dan relevan, pengguna tidak perlu menghabiskan waktu lama untuk menemukan makanan yang diinginkan.  
+
+3. **Meningkatkan Eksposur dan Penjualan Makanan Baru**:  
+   Sistem ini membantu memperkenalkan makanan baru kepada pengguna, meningkatkan kemungkinan makanan tersebut dicoba dan diterima di pasar.  
+
+Secara keseluruhan, proyek ini tidak hanya berhasil membangun model rekomendasi dengan performa yang memuaskan, tetapi juga memberikan manfaat langsung dalam meningkatkan pengalaman pengguna dan potensi keuntungan platform. Pendekatan gabungan ini memberikan solusi holistik untuk memenuhi kebutuhan pengguna dalam memilih makanan dan mendukung pengenalan variasi makanan baru.
+## Referensi
+
+1. [Chow, Y. Y., Haw, S. C., Naveen, P., Anaam, E. A., & Mahdin, H. B. (2023). Food Recommender System: A Review on Techniques, Datasets and Evaluation Metrics. Journal of System and Management Sciences, 13(5), 153-168.](https://www.aasmr.org/jsms/Vol13/No.5/Vol.13%20No.5.10.pdf)
+2. [Gaikwad, S. M., Kutubuddin, S. A., Madki, B. M. A., & Bhange, C. (2023). Food Recommendation System Using Content Based & Collaborative Filtering. International Research Journal of Innovations in Engineering and Technology, 7(12), 238.](https://www.proquest.com/openview/231c3bcbc225e7beb2b2a8bceb903a8f/1?pq-origsite=gscholar&cbl=5314840)
+
+
+</div>
