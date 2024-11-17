@@ -12,26 +12,26 @@ Proyek ini penting karena dapat meningkatkan pengalaman pengguna dalam memilih m
 
 Dalam pengembangan sistem rekomendasi makanan, terdapat beberapa tantangan yang harus diselesaikan untuk memastikan pengalaman pengguna yang lebih baik dan kinerja bisnis yang lebih optimal. Berikut adalah beberapa pernyataan masalah yang relevan:
 
-1. **Pernyataan Masalah 1: Pengguna kesulitan menemukan makanan yang sesuai dengan selera mereka di antara banyaknya pilihan yang tersedia.**
+1. Pengguna kesulitan menemukan makanan yang sesuai dengan selera mereka di antara banyaknya pilihan yang tersedia.**
    - Banyaknya pilihan makanan yang tersedia sering kali membuat pengguna merasa kebingungan atau terjebak dalam proses pencarian yang memakan waktu. Tanpa sistem yang membantu menyaring dan memberikan rekomendasi yang relevan, pengguna mungkin merasa frustrasi dan akhirnya memilih untuk tidak melanjutkan pencarian atau bahkan tidak melakukan pemesanan.
 
-2. **Pernyataan Masalah 2: Pengguna yang mencari makanan berdasarkan jenis atau kategori tertentu (seperti makanan Chinese, Thai, atau Mexican) kesulitan menemukan pilihan yang tepat.**
+2. Pengguna yang mencari makanan berdasarkan jenis atau kategori tertentu (seperti makanan Chinese, Thai, atau Mexican) kesulitan menemukan pilihan yang tepat.**
    - Meskipun ada berbagai jenis makanan berdasarkan kategori tertentu, tanpa sistem yang bisa menyaring makanan berdasarkan jenis atau kategori ini, pengguna harus menelusuri banyak pilihan untuk menemukan makanan yang sesuai dengan keinginan mereka. Hal ini bisa memperlambat proses pemilihan makanan dan menurunkan kepuasan pengguna.
 
-3. **Pernyataan Masalah 3: Platform kuliner kesulitan dalam memperkenalkan variasi atau makanan baru kepada pengguna yang sudah terbiasa dengan pilihan tertentu.**
+3. Platform kuliner kesulitan dalam memperkenalkan variasi atau makanan baru kepada pengguna yang sudah terbiasa dengan pilihan tertentu.**
    - Restoran atau platform pengantaran makanan sering kali kesulitan untuk mempromosikan makanan baru atau variasi menu yang belum dikenal oleh pengguna. Tanpa rekomendasi yang cerdas, pengguna mungkin terus memilih makanan yang sama berulang-ulang dan tidak terbuka untuk mencoba variasi baru.
 
 ### Goals
 
 Tujuan dari proyek ini adalah untuk membangun sistem rekomendasi yang dapat mengatasi pernyataan masalah di atas dan memberikan manfaat lebih bagi pengguna dan bisnis kuliner. Berikut adalah beberapa tujuan yang ingin dicapai:
 
-1. **Tujuan 1: Membantu pengguna menemukan makanan yang sesuai dengan selera mereka secara lebih efisien dan relevan.**
+1. Membantu pengguna menemukan makanan yang sesuai dengan selera mereka secara lebih efisien dan relevan.**
    - Sistem rekomendasi akan menyaring pilihan makanan berdasarkan input yang diberikan oleh pengguna, seperti nama makanan atau jenis makanan (misalnya Chinese, Thai, atau Mexican), sehingga pengguna dapat dengan cepat menemukan makanan yang sesuai dengan preferensi mereka tanpa harus mencari secara manual.
 
-2. **Tujuan 2: Menyediakan rekomendasi makanan berdasarkan kategori atau jenis tertentu, seperti Chinese, Thai, atau Mexican, untuk memudahkan pencarian.**
+2. Menyediakan rekomendasi makanan berdasarkan kategori atau jenis tertentu, seperti Chinese, Thai, atau Mexican, untuk memudahkan pencarian.**
    - Dengan memungkinkan pengguna untuk mencari makanan berdasarkan kategori atau jenis yang lebih spesifik, sistem ini akan mempercepat pencarian dan membantu pengguna menemukan makanan yang mereka inginkan dengan lebih mudah dan tanpa kerumitan.
 
-3. **Tujuan 3: Meningkatkan engagement dengan memberikan rekomendasi yang lebih personal dan memperkenalkan variasi atau makanan baru yang relevan.**
+3. Meningkatkan engagement dengan memberikan rekomendasi yang lebih personal dan memperkenalkan variasi atau makanan baru yang relevan.**
    - Sistem ini akan mendorong pengguna untuk mencoba makanan baru berdasarkan jenis atau kategori makanan yang sudah mereka pilih sebelumnya, sehingga meningkatkan variasi pemilihan makanan dan mempromosikan makanan baru atau menu yang jarang dipilih.
 
 ### Solution Approach
@@ -51,15 +51,35 @@ Untuk mencapai tujuan di atas, ada beberapa pendekatan yang dapat digunakan dala
      1. Membuat **user-item interaction matrix** yang menunjukkan interaksi pengguna dengan makanan.
      2. Menggunakan algoritma seperti **k-nearest neighbors (KNN)** atau **matrix factorization** untuk menemukan kesamaan antar pengguna dan memberikan rekomendasi berdasarkan makanan yang dipilih oleh pengguna lain dengan preferensi serupa.
 
-### Kesimpulan
-
 Dengan pendekatan **Content-Based Filtering** dan **Collaborative Filtering**, sistem rekomendasi ini dapat membantu pengguna menemukan makanan yang sesuai dengan preferensi mereka, baik berdasarkan jenis atau kategori makanan yang mereka pilih (seperti Chinese, Thai, atau Mexican), maupun berdasarkan pola perilaku pengguna lain. Kedua metode ini memungkinkan sistem untuk memberikan rekomendasi yang lebih personal dan relevan, sehingga meningkatkan kepuasan pengguna dan membantu bisnis kuliner dalam memperkenalkan variasi makanan baru atau menu yang jarang dipilih.
 
 ## Data Understanding
 
-Dataset yang digunakan dalam proyek ini terdiri dari dua tabel: **data makanan** dan **rating makanan**. Dataset makanan berisi informasi tentang berbagai hidangan, termasuk nama makanan, kategori (seperti "Healthy Food", "Snack", dll.), apakah makanan tersebut vegan atau non-vegan, serta deskripsi bahan-bahan yang digunakan. Dataset rating berisi penilaian yang diberikan oleh pengguna terhadap makanan, yang mencakup ID pengguna, ID makanan, dan nilai rating (1-10). Dataset ini dapat diunduh melalui [Kaggle Food Dataset](https://www.kaggle.com/datasets).
+Dataset yang digunakan dalam proyek ini terdiri dari dua tabel: **data makanan** dan **rating makanan**. Dataset makanan berisi informasi tentang berbagai hidangan, termasuk nama makanan, kategori (seperti "Healthy Food", "Snack", dll.), apakah makanan tersebut vegan atau non-vegan, serta deskripsi bahan-bahan yang digunakan. Dataset rating berisi penilaian yang diberikan oleh pengguna terhadap makanan, yang mencakup ID pengguna, ID makanan, dan nilai rating (1-10). Dataset ini dapat diunduh melalui.
+
+
+| Jenis      | Keterangan                                                                 |
+|------------|-----------------------------------------------------------------------------|
+| Title      | Food Recommendation System                                                             |
+| Source     | [Kaggle](https://www.kaggle.com/datasets/schemersays/food-recommendation-system)                  |
+| Maintainer | [schemersays](https://www.kaggle.com/schemersays)                                   |
+| License    | Unknown                  |
+| Visibility | Publik                                                                      |
+| Tags       | _Busines_ |
+| Usability  | 4.71                                                                      |
+
+
 
 ### Deskripsi Variabel
+
+| food_id | name                     | c_type      | veg_non | describe                                                    |
+|---------|--------------------------|-------------|---------|-------------------------------------------------------------|
+| 0       | summer squash salad      | Healthy Food| veg     | white balsamic vinegar, lemon juice, lemon rind...          |
+| 1       | chicken minced salad     | Healthy Food| non-veg | olive oil, chicken mince, garlic (minced), onion...        |
+| 2       | sweet chilli almonds     | Snack       | veg     | almonds whole, egg white, curry leaves, salt, ...          |
+| 3       | tricolour salad          | Healthy Food| veg     | vinegar, honey/sugar, soy sauce, salt, garlic ...           |
+| 4       | christmas cake           | Dessert     | veg     | christmas dry fruits (pre-soaked), orange zest...          |
+
 
 1. **Tabel Makanan (`data`)**:
    - **`food_id`**: ID unik untuk setiap makanan (integer).
@@ -67,6 +87,16 @@ Dataset yang digunakan dalam proyek ini terdiri dari dua tabel: **data makanan**
    - **`c_type`**: Kategori makanan, seperti "Healthy Food", "Snack", "Dessert" (string).
    - **`veg_non`**: Vegetarian atau non-vegetarian ("veg" atau "non-veg") (string).
    - **`describe`**: Deskripsi bahan-bahan makanan (string).
+
+
+| user_id | food_id | rating |
+|---------|---------|--------|
+| 0       | 88.0    | 4.0    |
+| 1       | 46.0    | 3.0    |
+| 2       | 24.0    | 5.0    |
+| 3       | 25.0    | 4.0    |
+| 4       | 49.0    | 1.0    |
+
 
 2. **Tabel Rating (`rating`)**:
    - **`user_id`**: ID unik pengguna (angka desimal).
@@ -111,8 +141,6 @@ Dataset yang digunakan dalam proyek ini terdiri dari dua tabel: **data makanan**
    print('Jumlah Type: ', len(data['c_type'].unique()))
    print('Jumlah Data: ', len(data['veg_non'].unique()))
    ```
-
-### Kesimpulan
 
 Melalui EDA, kita mendapatkan gambaran tentang distribusi jenis makanan dan rating pengguna, serta proporsi makanan vegan/non-vegan. Ini membantu dalam merancang sistem rekomendasi yang sesuai dengan preferensi pengguna dan memberikan wawasan tentang kategori makanan yang paling banyak atau kurang populer.
 
