@@ -417,7 +417,6 @@ Pembagian dataset yang acak membantu menghindari bias dan memastikan bahwa model
 
 ---
 
-### **Kesimpulan**
 Proses **Data Preparation** yang terdiri dari langkah-langkah pembersihan data, normalisasi, encoding, serta transformasi teks memastikan bahwa dataset siap digunakan untuk membangun model **Content-Based Filtering** dan **Collaborative Filtering**. Dengan tahapan yang tepat, kita dapat menghasilkan rekomendasi yang lebih akurat dan relevan untuk pengguna.
 
 ## Modeling
