@@ -679,7 +679,7 @@ $$
 
 ---
 
-
+![Plot](https://github.com/Primadya/sistemrekomendasidicoding/blob/main/image/Screenshot%20from%202024-11-16%2018-40-53.png?raw=true)
 
 **Metrik Evaluasi:**
 
