@@ -401,35 +401,6 @@ Fungsi `food_recommendations` menerima input berupa nama makanan atau jenis maka
 3. **Pencocokan Kategori**: Jika tidak ada pencocokan nama, sistem akan mencari berdasarkan kategori makanan.
 4. **Rekomendasi**: Sistem akan mengembalikan **Top-N** rekomendasi berdasarkan kemiripan konten.
 
-#### Hasil Rekomendasi
-
-#### Hasil Rekomendasi dari 'japanese'
-| Name                                         | C_Type  | Veg_Non |
-|----------------------------------------------|---------|---------|
-| japanese curry arancini with barley salsa   | japanese | veg     |
-| japanese fish stew                           | japanese | non-veg |
-
-#### Hasil Rekomendasi dari 'pizza'
-| Name                  | C_Type | Veg_Non |
-|-----------------------|--------|---------|
-| christmas tree pizza  | italian | veg     |
-| mexican pizza         | mexican | veg     |
-| filo pizza            | italian | veg     |
-| kuttu atta pizza      | italian | veg     |
-| meat lovers pizza     | italian | non-veg |
-| tricolour pizza       | italian | veg     |
-
-#### Evaluasi
-
-**Pencarian Pengguna:**
-1. japanese
-2. pizza
-
-**Total Pencarian:** 2  
-**Total Rekomendasi:** 8  
-**Pencarian dengan Rekomendasi:** 2  
-**Presisi:** 25.00%  
-**Akurasi:** 100.00%
 
 ### Kelebihan dan Kekurangan
 
@@ -516,34 +487,6 @@ top_n_recommendations_collaborative = get_collaborative_recommendations(2, predi
 print("Top-5 Collaborative Recommendations for User 2:")
 print(top_n_recommendations_collaborative)
 ```
-#### Rekomendasi Makanan untuk Pengguna: 22.0
-
-#### Makanan dengan Rating Tinggi dari Pengguna:
-| Makanan                                       | Tipe             | Rating |
-|-----------------------------------------------|------------------|--------|
-| cajun spiced turkey wrapped with bacon       | Mexican          | 6.0    |
-| chicken minced salad                         | Healthy Food     | 5.0    |
-
-#### Top 10 Rekomendasi Makanan untuk Pengguna:
-| Makanan                                   | Tipe            |
-|-------------------------------------------|-----------------|
-| chicken quinoa biryani                    | Healthy Food    |
-| fruit cube salad                          | Healthy Food    |
-| corn & jalapeno poppers                   | Mexican         |
-| mixed beans salad                         | Healthy Food    |
-| white chocolate and lemon pastry          | Dessert         |
-| chicken tikka                             | Indian          |
-| apple and pear cake                       | Healthy Food    |
-| filter coffee                             | Beverage        |
-| spinach & banana pancakes                 | Healthy Food    |
-| amritsari fish                            | Indian          |
-
-#### Rekomendasi Makanan Berikutnya untuk Pengguna:
-| Makanan                                   | Tipe            |
-|-------------------------------------------|-----------------|
-| chicken quinoa biryani                    | Healthy Food    |
-
----
 
 
 **Kelebihan Collaborative Filtering:**
