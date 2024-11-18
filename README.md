@@ -294,15 +294,54 @@ def food_recommendations(input_value, similarity_data=cosine_sim_df, items=foods
 input_value = input("Masukkan nama makanan atau jenis makanan yang Anda suka: ").strip()
 result = food_recommendations(input_value, k=4)
 ```
+#### Cara Kerja
 
-**Kelebihan Content-Based Filtering:**
-- **Personalized Recommendations**: Memberikan rekomendasi yang sangat relevan berdasarkan deskripsi atau jenis makanan yang disukai.
+Fungsi `food_recommendations` menerima input berupa nama makanan atau jenis makanan. Sistem akan mencari kemiripan menggunakan **Cosine Similarity** untuk memberikan rekomendasi yang relevan. Berikut adalah langkah-langkahnya:
+
+1. **Input dari Pengguna**: Masukkan nama atau jenis makanan yang Anda sukai.
+2. **Pencocokan Nama**: Sistem akan mencari makanan yang cocok berdasarkan nama.
+3. **Pencocokan Kategori**: Jika tidak ada pencocokan nama, sistem akan mencari berdasarkan kategori makanan.
+4. **Rekomendasi**: Sistem akan mengembalikan **Top-N** rekomendasi berdasarkan kemiripan konten.
+
+#### Hasil Rekomendasi
+
+#### Hasil Rekomendasi dari 'japanese'
+| Name                                         | C_Type  | Veg_Non |
+|----------------------------------------------|---------|---------|
+| japanese curry arancini with barley salsa   | japanese | veg     |
+| japanese fish stew                           | japanese | non-veg |
+
+#### Hasil Rekomendasi dari 'pizza'
+| Name                  | C_Type | Veg_Non |
+|-----------------------|--------|---------|
+| christmas tree pizza  | italian | veg     |
+| mexican pizza         | mexican | veg     |
+| filo pizza            | italian | veg     |
+| kuttu atta pizza      | italian | veg     |
+| meat lovers pizza     | italian | non-veg |
+| tricolour pizza       | italian | veg     |
+
+#### Evaluasi
+
+**Pencarian Pengguna:**
+1. japanese
+2. pizza
+
+**Total Pencarian:** 2  
+**Total Rekomendasi:** 8  
+**Pencarian dengan Rekomendasi:** 2  
+**Presisi:** 25.00%  
+**Akurasi:** 100.00%
+
+### Kelebihan dan Kekurangan
+
+#### Kelebihan Content-Based Filtering:
+- **Rekomendasi yang Dipersonalisasi**: Memberikan rekomendasi yang sangat relevan berdasarkan deskripsi atau jenis makanan yang Anda sukai.
 - **Tidak Memerlukan Data Pengguna Lain**: Cocok untuk situasi di mana tidak ada cukup interaksi pengguna atau data rating.
 
-**Kekurangan Content-Based Filtering:**
-- **Keterbatasan Variasi**: Hanya memberikan rekomendasi berdasarkan kemiripan konten, jadi bisa jadi terbatas jika tidak ada banyak variasi dalam deskripsi atau kategori makanan.
+#### Kekurangan Content-Based Filtering:
+- **Keterbatasan Variasi**: Hanya memberikan rekomendasi berdasarkan kemiripan konten, sehingga bisa jadi terbatas jika tidak ada banyak variasi dalam deskripsi atau kategori makanan.
 - **Mungkin Kurang Menarik**: Bisa memberikan rekomendasi yang terlalu serupa, tanpa mengeksplorasi makanan yang berbeda dari yang sudah disukai.
-
 ---
 
 ### Collaborative Filtering (CF) Model
@@ -379,6 +418,35 @@ top_n_recommendations_collaborative = get_collaborative_recommendations(2, predi
 print("Top-5 Collaborative Recommendations for User 2:")
 print(top_n_recommendations_collaborative)
 ```
+#### Rekomendasi Makanan untuk Pengguna: 22.0
+
+#### Makanan dengan Rating Tinggi dari Pengguna:
+| Makanan                                       | Tipe             | Rating |
+|-----------------------------------------------|------------------|--------|
+| cajun spiced turkey wrapped with bacon       | Mexican          | 6.0    |
+| chicken minced salad                         | Healthy Food     | 5.0    |
+
+#### Top 10 Rekomendasi Makanan untuk Pengguna:
+| Makanan                                   | Tipe            |
+|-------------------------------------------|-----------------|
+| chicken quinoa biryani                    | Healthy Food    |
+| fruit cube salad                          | Healthy Food    |
+| corn & jalapeno poppers                   | Mexican         |
+| mixed beans salad                         | Healthy Food    |
+| white chocolate and lemon pastry          | Dessert         |
+| chicken tikka                             | Indian          |
+| apple and pear cake                       | Healthy Food    |
+| filter coffee                             | Beverage        |
+| spinach & banana pancakes                 | Healthy Food    |
+| amritsari fish                            | Indian          |
+
+#### Rekomendasi Makanan Berikutnya untuk Pengguna:
+| Makanan                                   | Tipe            |
+|-------------------------------------------|-----------------|
+| chicken quinoa biryani                    | Healthy Food    |
+
+---
+
 
 **Kelebihan Collaborative Filtering:**
 - **Variasi Lebih Banyak**: Memberikan rekomendasi yang lebih beragam dan menarik, karena didasarkan pada interaksi pengguna lain.
@@ -418,7 +486,7 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
 - **Akurasi (Accuracy)**: 100.00%
   - **Rumus**:
     
-      ![Accuracy Formula](https://latex.codecogs.com/svg.latex?%5Ctext%7BAkurasi%7D%20%3D%20%5Cfrac%7B%5Ctext%7BTrue%20Positives%7D%20%2B%20%5Ctext%7BTrue%20Negatives%7D%7D%7B%5Ctext%7BTotal%20Prediksi%7D%7D)
+     ![Accuracy Formula](https://latex.codecogs.com/svg.latex?%5Ctext%7BAkurasi%7D%20%3D%20%5Cfrac%7B%5Ctext%7BTrue%20Positives%7D%20%2B%20%5Ctext%7BTrue%20Negatives%7D%7D%7B%5Ctext%7BTotal%20Prediksi%7D%7D)
 
     
   - **Penjelasan**: Akurasi yang sangat tinggi menunjukkan bahwa sebagian besar rekomendasi yang dihasilkan oleh model adalah benar (artinya model dapat memprediksi dengan benar mayoritas item yang relevan bagi pengguna). Namun, meskipun akurasi tinggi, ini bisa menipu karena banyak dari rekomendasi tersebut tidak relevan. Artinya, akurasi yang tinggi tidak selalu berarti kualitas rekomendasi yang baik.
