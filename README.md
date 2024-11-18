@@ -487,14 +487,9 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
 
 - **Akurasi (Accuracy)**: 100.00%
   - **Rumus**:
- 
-    $$
-    \text{Akurasi} = \frac{{\text{True Positives} +  \text{True Negatives}}} {\text{Total Prediksi}}
-    $$
-$$
-\text{Akurasi} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Prediksi}}
-$$
-
+      $$
+      \text{Akurasi} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Prediksi}}
+      $$
     
   - **Penjelasan**: Akurasi yang sangat tinggi menunjukkan bahwa sebagian besar rekomendasi yang dihasilkan oleh model adalah benar (artinya model dapat memprediksi dengan benar mayoritas item yang relevan bagi pengguna). Namun, meskipun akurasi tinggi, ini bisa menipu karena banyak dari rekomendasi tersebut tidak relevan. Artinya, akurasi yang tinggi tidak selalu berarti kualitas rekomendasi yang baik.
  
