@@ -515,7 +515,9 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
   - **RMSE**: 0.3291
   - **Rumus RMSE (Root Mean Squared Error)**:  
        
-   ![RMSE Formula](https://latex.codecogs.com/svg.latex?RMSE%20%3D%20%5Csqrt%7B%5Cfrac%7B1%7D%7Bn%7D%5Csum%20%28%5Chat%7Br%7D_i%20-%20r_i%29%5E2%7D)
+   $$
+\text{RMSE} = \sqrt{\frac{1}{n} \sum \left( \hat{r}_i - r_i \right)^2}
+$$
 
    
    Di mana:
