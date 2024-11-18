@@ -582,6 +582,36 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
 
 #### 1. **Content-Based Filtering**
 
+#### Hasil Rekomendasi
+
+#### Hasil Rekomendasi dari 'japanese'
+| Name                                         | C_Type  | Veg_Non |
+|----------------------------------------------|---------|---------|
+| japanese curry arancini with barley salsa   | japanese | veg     |
+| japanese fish stew                           | japanese | non-veg |
+
+#### Hasil Rekomendasi dari 'pizza'
+| Name                  | C_Type | Veg_Non |
+|-----------------------|--------|---------|
+| christmas tree pizza  | italian | veg     |
+| mexican pizza         | mexican | veg     |
+| filo pizza            | italian | veg     |
+| kuttu atta pizza      | italian | veg     |
+| meat lovers pizza     | italian | non-veg |
+| tricolour pizza       | italian | veg     |
+
+#### Evaluasi
+
+**Pencarian Pengguna:**
+1. japanese
+2. pizza
+
+**Total Pencarian:** 2  
+**Total Rekomendasi:** 8  
+**Pencarian dengan Rekomendasi:** 2  
+**Presisi:** 25.00%  
+**Akurasi:** 100.00%
+
 **Metrik Evaluasi:**
 
 - **Presisi (Precision)**: 25.00%
@@ -619,6 +649,37 @@ $$
 ---
 
 #### 2. **Collaborative Filtering (Neural Network)**
+
+#### Rekomendasi Makanan untuk Pengguna: 22.0
+
+#### Makanan dengan Rating Tinggi dari Pengguna:
+| Makanan                                       | Tipe             | Rating |
+|-----------------------------------------------|------------------|--------|
+| cajun spiced turkey wrapped with bacon       | Mexican          | 6.0    |
+| chicken minced salad                         | Healthy Food     | 5.0    |
+
+#### Top 10 Rekomendasi Makanan untuk Pengguna:
+| Makanan                                   | Tipe            |
+|-------------------------------------------|-----------------|
+| chicken quinoa biryani                    | Healthy Food    |
+| fruit cube salad                          | Healthy Food    |
+| corn & jalapeno poppers                   | Mexican         |
+| mixed beans salad                         | Healthy Food    |
+| white chocolate and lemon pastry          | Dessert         |
+| chicken tikka                             | Indian          |
+| apple and pear cake                       | Healthy Food    |
+| filter coffee                             | Beverage        |
+| spinach & banana pancakes                 | Healthy Food    |
+| amritsari fish                            | Indian          |
+
+#### Rekomendasi Makanan Berikutnya untuk Pengguna:
+| Makanan                                   | Tipe            |
+|-------------------------------------------|-----------------|
+| chicken quinoa biryani                    | Healthy Food    |
+
+---
+
+
 
 **Metrik Evaluasi:**
 
