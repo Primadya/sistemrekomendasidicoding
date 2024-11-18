@@ -487,6 +487,10 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
 
 - **Akurasi (Accuracy)**: 100.00%
   - **Rumus**:
+ 
+    $$
+    \text{Akurasi} = \frac{{\text{True Positives} +  \text{True Negatives}}} {\text{Total Prediksi}}
+    $$
 $$
 \text{Akurasi} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Prediksi}}
 $$
