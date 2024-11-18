@@ -198,68 +198,43 @@ Dataset yang digunakan dalam proyek ini terdiri dari dua tabel: **data makanan**
 Melalui EDA, kita mendapatkan gambaran tentang distribusi jenis makanan dan rating pengguna, serta proporsi makanan vegan/non-vegan. Ini membantu dalam merancang sistem rekomendasi yang sesuai dengan preferensi pengguna dan memberikan wawasan tentang kategori makanan yang paling banyak atau kurang populer.
 
 
-## **Data Preparation**
-
-Pada tahap **Data Preparation**, dilakukan beberapa proses untuk memastikan bahwa data yang digunakan dalam sistem rekomendasi sudah bersih, konsisten, dan siap diproses oleh model **Content-Based Filtering** dan **Collaborative Filtering**. Berikut adalah langkah-langkahnya beserta penjelasan mengapa setiap tahapan ini penting.
+Berikut adalah penjelasan secara rinci dan terstruktur sesuai dengan urutan langkah-langkah yang perlu dilakukan untuk **Data Preparation** dalam sistem rekomendasi menggunakan **Content-Based Filtering** dan **Collaborative Filtering**:
 
 ---
 
-### **1. Membaca Dataset dan Mengubah Nama Kolom Menjadi Lowercase**
+## **Data Preparation**
 
-Agar mempermudah proses penulisan dan pengolahan data, nama kolom diubah menjadi huruf kecil (*lowercase*).  
-Hal ini dilakukan untuk memastikan keseragaman dalam penamaan fitur sehingga mencegah kesalahan karena perbedaan kapitalisasi.
+Pada tahap **Data Preparation**, dilakukan beberapa langkah untuk memastikan bahwa data yang digunakan dalam sistem rekomendasi sudah bersih, konsisten, dan siap diproses oleh model **Content-Based Filtering** dan **Collaborative Filtering**. Berikut adalah langkah-langkah yang dilakukan:
+
+---
+
+#### **1. Mengubah Nama Kolom Menjadi Lowercase**
+Agar lebih mudah dalam pengolahan data, nama kolom diubah menjadi huruf kecil (lowercase) pada dataset `data` dan `rating`.
 
 ```python
 data.columns = data.columns.str.lower()
 rating.columns = rating.columns.str.lower()
 ```
 
-**Alasan:**  
-Dengan nama kolom yang seragam, proses pengolahan data menjadi lebih mudah dan lebih rapi.
+**Alasan**:  
+Dengan nama kolom yang konsisten (semua huruf kecil), pengolahan data menjadi lebih mudah dan tidak akan ada masalah karena perbedaan kapitalisasi pada kolom.
 
 ---
 
-### **2. Menggabungkan Dataset**
-
-Dataset dari tabel **rating** dan **data** digabungkan berdasarkan kolom `food_id` untuk menyatukan informasi rating makanan dengan detail makanan, seperti deskripsi dan kategori.
+#### **2. Menggabungkan Dataset Berdasarkan `food_id`**
+Dataset `rating` dan `data` digabungkan berdasarkan kolom `food_id` untuk menyatukan informasi rating makanan dengan detail makanan (nama, kategori, deskripsi).
 
 ```python
 merged_data = pd.merge(rating, data, on='food_id', how='inner', suffixes=('_user', '_food'))
 ```
 
-**Alasan:**  
-Penggabungan ini memastikan semua data relevan berada dalam satu dataset untuk digunakan dalam proses pembelajaran model.
+**Alasan**:  
+Penggabungan dataset ini memastikan bahwa semua informasi terkait makanan dan ratingnya tersedia dalam satu dataset yang akan digunakan oleh model.
 
 ---
 
-### **3. Pembersihan Data**
-
-#### **a. Menghapus Nilai yang Hilang (Missing Values):**  
-Pengecekan dilakukan untuk melihat apakah ada data kosong (null), dan baris dengan nilai kosong dihapus.
-
-```python
-merged_data.isnull().sum()  # Cek missing value
-merged_data = merged_data.dropna()  # Menghapus nilai null
-```
-
-**Alasan:**  
-Nilai yang hilang dapat menyebabkan error pada proses analisis dan model. Menghapusnya memastikan data bersih dan lengkap.
-
-#### **b. Menghapus Data Duplikat:**  
-Menghapus duplikasi berdasarkan `food_id` untuk memastikan setiap makanan hanya memiliki satu data unik.
-
-```python
-merged_data = merged_data.drop_duplicates('food_id')
-```
-
-**Alasan:**  
-Data duplikat dapat menyebabkan bias dalam model rekomendasi dan memengaruhi akurasi hasil rekomendasi.
-
----
-
-### **4. Normalisasi Teks**
-
-Deskripsi makanan (`describe`), nama (`name`), dan kategori makanan (`c_type`) diubah menjadi huruf kecil untuk menyamakan format teks.
+#### **3. Mengubah Kolom Menjadi Lowercase**
+Normalisasi teks pada kolom seperti `name`, `c_type`, dan `describe` agar semua huruf menjadi kecil. Ini mempermudah proses analisis teks, khususnya dalam Content-Based Filtering.
 
 ```python
 merged_data['name'] = merged_data['name'].str.lower()
@@ -267,28 +242,134 @@ merged_data['c_type'] = merged_data['c_type'].str.lower()
 merged_data['describe'] = merged_data['describe'].str.lower()
 ```
 
-**Alasan:**  
-Normalisasi teks membantu mempermudah pengolahan data berbasis teks, terutama dalam menghitung kesamaan dengan model **Content-Based Filtering**.
+**Alasan**:  
+Normalisasi teks memastikan konsistensi dalam teks sehingga tidak ada variasi kapitalisasi yang dapat memengaruhi hasil analisis.
 
 ---
 
-### **5. Mengacak Dataset**
-
-Dataset diacak untuk mengurangi kemungkinan bias dalam pembagian data.
+#### **4. Cek Missing Values dan Hapus Nilai Null**
+Periksa apakah ada nilai yang hilang dalam dataset, kemudian hapus baris dengan nilai null.
 
 ```python
-df = df.sample(frac=1, random_state=42)
+merged_data.isnull().sum()  # Cek missing value
+merged_data = merged_data.dropna()  # Menghapus nilai null
 ```
 
-**Alasan:**  
-Dengan mengacak data, kita menghindari pembagian data yang berpola, sehingga proses pelatihan model lebih adil dan representatif.
+**Alasan**:  
+Nilai yang hilang dapat menyebabkan error atau bias dalam analisis. Menghapus baris dengan nilai kosong memastikan data yang digunakan bersih dan lengkap.
 
 ---
 
-### **6. Pengkodean dan Normalisasi**
+#### **5. Menghapus Duplikat Berdasarkan `food_id`**
+Hapus duplikasi berdasarkan kolom `food_id` agar setiap makanan hanya muncul satu kali dalam dataset.
 
-#### **a. Pengkodean ID Pengguna dan Makanan (Collaborative Filtering):**  
-ID pengguna (`user_id`) dan makanan (`food_id`) diubah menjadi angka untuk memudahkan pembuatan matriks.
+```python
+merged_data = merged_data.drop_duplicates('food_id')
+```
+
+**Alasan**:  
+Duplikat dapat menyebabkan bias dalam model rekomendasi dan mempengaruhi akurasi hasilnya, jadi penting untuk memastikan setiap makanan hanya memiliki satu entri.
+
+---
+
+#### **6. Membuat DataFrame untuk Model**
+Setelah data dibersihkan, buat DataFrame baru yang hanya berisi informasi yang diperlukan untuk model.
+
+```python
+foods = pd.DataFrame({
+    'food_id': merged_data['food_id'].tolist(),
+    'name': merged_data['name'].tolist(),
+    'c_type': merged_data['c_type'].tolist(),
+    'veg_non': merged_data['veg_non'].tolist(),
+    'describe': merged_data['describe'].tolist(),
+})
+```
+
+**Alasan**:  
+Memastikan bahwa data yang digunakan untuk analisis lebih terstruktur dan mudah diakses oleh model.
+
+---
+
+### **Content-Based Filtering**
+
+Pada model **Content-Based Filtering**, kita menghitung kesamaan antara makanan berdasarkan fitur deskripsi. Langkah-langkah berikut dilakukan untuk transformasi teks dan menghitung kesamaan.
+
+#### **7. TF-IDF Vectorizer untuk Kolom `Describe`**
+Deskripsi makanan akan diubah menjadi representasi numerik menggunakan **TF-IDF Vectorizer**.
+
+```python
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+tf = TfidfVectorizer(stop_words='english')  # Menghapus kata umum dalam bahasa Inggris
+tfidf_matrix = tf.fit_transform(foods['describe'])
+```
+
+**Alasan**:  
+TF-IDF membantu mengidentifikasi kata-kata yang penting dalam deskripsi makanan, sehingga model dapat menghitung kesamaan antar makanan berdasarkan kontennya.
+
+---
+
+#### **8. Mapping Fitur dan Matriks TF-IDF**
+Setelah transformasi teks, kita akan memetakan hasil TF-IDF menjadi fitur numerik, dan menampilkan beberapa fitur unik yang terdeteksi dalam kolom `describe`.
+
+```python
+feature_names = tf.get_feature_names_out()  # Mendapatkan nama fitur (kata-kata unik)
+print("Fitur unik dari kolom 'describe':")
+print(feature_names, "\n")
+
+# Menampilkan Matriks TF-IDF dalam bentuk DataFrame
+tfidf_df = pd.DataFrame(
+    tfidf_matrix.todense(),  # Konversi sparse matrix ke dense matrix
+    columns=feature_names,  # Kolom berdasarkan kata-kata unik
+    index=foods['name']  # Nama makanan sebagai indeks
+)
+```
+
+**Alasan**:  
+Mapping ini memungkinkan kita melihat kata-kata yang paling berpengaruh dalam deskripsi makanan, yang nantinya digunakan untuk menghitung kesamaan antar makanan.
+
+---
+
+#### **9. Menghitung Cosine Similarity**
+Cosine Similarity dihitung antara makanan-makanan yang ada untuk melihat sejauh mana kesamaan antar makanan berdasarkan deskripsi mereka.
+
+```python
+from sklearn.metrics.pairwise import cosine_similarity
+
+# Menghitung cosine similarity
+cosine_sim = cosine_similarity(tfidf_matrix)
+
+# Membuat DataFrame dari matriks cosine similarity
+cosine_sim_df = pd.DataFrame(cosine_sim, index=foods['name'], columns=foods['name'])
+
+print("\n=== Contoh Cosine Similarity Matrix ===")
+print(cosine_sim_df.head())
+```
+
+**Alasan**:  
+Cosine Similarity memungkinkan kita untuk mengukur sejauh mana dua makanan memiliki kemiripan berdasarkan deskripsi mereka. Matriks ini akan digunakan dalam rekomendasi berbasis konten.
+
+---
+
+### **Collaborative Filtering**
+
+Pada model **Collaborative Filtering**, kita mengandalkan interaksi antara pengguna dan makanan (rating) untuk memberikan rekomendasi. Langkah-langkah berikut dilakukan untuk mempersiapkan data.
+
+#### **10. Cek Missing Values dan Hapus Nilai Null**
+Periksa dan hapus baris dengan nilai null dalam dataset yang digunakan untuk Collaborative Filtering.
+
+```python
+df.isnull().sum()  # Cek missing value
+df = df.dropna()  # Menghapus nilai null
+```
+
+**Alasan**:  
+Nilai null dalam dataset rating dapat mengganggu proses pelatihan model, jadi perlu dihapus untuk menjaga kualitas data.
+
+---
+
+#### **11. Encoding `user_id` dan `food_id`**
+ID pengguna dan ID makanan diubah menjadi representasi numerik untuk keperluan pemrosesan model Collaborative Filtering.
 
 ```python
 user_ids = df['user_id'].unique().tolist()
@@ -300,56 +381,44 @@ df['user'] = df['user_id'].map(user_to_user_encoded)
 df['food'] = df['food_id'].map(food_to_food_encoded)
 ```
 
-**Alasan:**  
-Model berbasis matriks membutuhkan representasi numerik untuk pengguna dan makanan.
+**Alasan**:  
+Model Collaborative Filtering berbasis matriks memerlukan data dalam bentuk numerik, sehingga pengkodean ID pengguna dan makanan ke angka memungkinkan pembuatan matriks interaksi yang efektif.
 
-#### **b. Normalisasi Rating (Collaborative Filtering):**  
-Rating pengguna dinormalisasi ke rentang 0 hingga 1.
+---
+
+#### **12. Normalisasi Rating**
+Normalisasi rating dilakukan untuk mengubah rating pengguna menjadi skala 0 hingga 1.
 
 ```python
+df['rating'] = df['rating'].values.astype(np.float32)
+min_rating, max_rating = df['rating'].min(), df['rating'].max()
+
 y = df['rating'].apply(lambda x: (x - min_rating) / (max_rating - min_rating)).values
 ```
 
-**Alasan:**  
-Normalisasi membuat rating memiliki skala yang seragam, sehingga model lebih stabil saat belajar.
+**Alasan**:  
+Normalisasi rating membuat skala rating menjadi seragam, yang membantu model untuk lebih stabil dan efektif selama pelatihan.
 
 ---
 
-### **7. Transformasi Teks dengan TF-IDF**
-
-Untuk model **Content-Based Filtering**, deskripsi makanan diubah menjadi representasi numerik menggunakan **TF-IDF Vectorizer**.
-
-```python
-from sklearn.feature_extraction.text import TfidfVectorizer
-
-tf = TfidfVectorizer(stop_words='english')
-tfidf_matrix = tf.fit_transform(foods['describe'])
-```
-
-**Alasan:**  
-TF-IDF menyoroti kata-kata penting dalam deskripsi makanan, sehingga memungkinkan model untuk menghitung kesamaan antar makanan berdasarkan kontennya.
-
----
-
-### **8. Pembagian Data**
-
-Dataset dibagi menjadi data latih (80%) dan validasi (20%) untuk mengevaluasi performa model.
+#### **13. Mengacak Dataset dan Pembagian Data**
+Dataset diacak dan dibagi menjadi data latih (80%) dan data validasi (20%) untuk evaluasi model.
 
 ```python
+df = df.sample(frac=1, random_state=42)  # Mengacak dataset
 train_indices = int(0.8 * df.shape[0])
 x_train, x_val, y_train, y_val = (
     x[:train_indices], x[train_indices:], y[:train_indices], y[train_indices:]
 )
 ```
 
-**Alasan:**  
-Pembagian ini memungkinkan evaluasi yang obyektif terhadap performa model.
+**Alasan**:  
+Pembagian dataset yang acak membantu menghindari bias dan memastikan bahwa model dilatih dengan representasi data yang lebih baik, serta dapat dievaluasi dengan data yang belum pernah dilihat sebelumnya.
 
 ---
 
-Tahapan **Data Preparation** memastikan data yang digunakan bersih, lengkap, dan sesuai format yang diperlukan.  
-Langkah-langkah seperti penghapusan duplikat, pengkodean ID, dan normalisasi teks mendukung keberhasilan model **Collaborative Filtering** dan **Content-Based Filtering** dalam memberikan rekomendasi yang akurat.
-
+### **Kesimpulan**
+Proses **Data Preparation** yang terdiri dari langkah-langkah pembersihan data, normalisasi, encoding, serta transformasi teks memastikan bahwa dataset siap digunakan untuk membangun model **Content-Based Filtering** dan **Collaborative Filtering**. Dengan tahapan yang tepat, kita dapat menghasilkan rekomendasi yang lebih akurat dan relevan untuk pengguna.
 
 ## Modeling
 ### Content-Based Filtering (CBF) Model
