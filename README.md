@@ -478,7 +478,9 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
 - **Presisi (Precision)**: 25.00%
   - **Rumus**:
     
-    ![Presisi Formula](https://latex.codecogs.com/svg.latex?\text{Presisi}%20=%20\frac{\text{True%20Positives}}{\text{True%20Positives}%20+%20\text{False%20Positives}})
+      $$
+      \text{Presisi} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
+      $$
 
 
   - **Penjelasan**: Presisi mengukur seberapa banyak rekomendasi yang diberikan model yang benar-benar relevan. Nilai presisi yang rendah (25%) menunjukkan bahwa meskipun model memberikan banyak rekomendasi yang tepat (akurat), sebagian besar rekomendasi tersebut tidak sesuai dengan preferensi pengguna. Model ini mungkin terlalu banyak memberikan rekomendasi yang kurang sesuai dengan pengguna karena tidak dapat menangkap seluruh preferensi pengguna secara mendalam.
@@ -486,7 +488,9 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
 - **Akurasi (Accuracy)**: 100.00%
   - **Rumus**:
     
-     ![Accuracy Formula](https://latex.codecogs.com/svg.latex?%5Ctext%7BAkurasi%7D%20%3D%20%5Cfrac%7B%5Ctext%7BTrue%20Positives%7D%20%2B%20%5Ctext%7BTrue%20Negatives%7D%7D%7B%5Ctext%7BTotal%20Prediksi%7D%7D)
+      $$
+      \text{Akurasi} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Prediksi}}
+      $$
 
     
   - **Penjelasan**: Akurasi yang sangat tinggi menunjukkan bahwa sebagian besar rekomendasi yang dihasilkan oleh model adalah benar (artinya model dapat memprediksi dengan benar mayoritas item yang relevan bagi pengguna). Namun, meskipun akurasi tinggi, ini bisa menipu karena banyak dari rekomendasi tersebut tidak relevan. Artinya, akurasi yang tinggi tidak selalu berarti kualitas rekomendasi yang baik.
