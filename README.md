@@ -428,37 +428,39 @@ Pada bagian **Content-Based Filtering**, pendekatan yang digunakan adalah mencar
 Fungsi `food_recommendations` menerima input dari pengguna, yang dapat berupa nama makanan atau jenis makanan. Berdasarkan input tersebut, fungsi ini mencari kemiripan menggunakan **Cosine Similarity** antara makanan yang sudah ada. Jika inputnya cocok dengan nama makanan atau kategori makanan, sistem akan mengembalikan **Top-N** rekomendasi berdasarkan kesamaan konten (nama, kategori, dan deskripsi makanan).
 
 ```python
-def food_recommendations(input_value, similarity_data=cosine_sim_df, items=foods[['name', 'c_type', 'veg_non']], k=4):
-    input_value = input_value.strip().lower()  # Pastikan input dalam lowercase dan tanpa spasi ekstra
+print("\nSelamat datang di sistem rekomendasi makanan!")
 
-    print(f"Input value: {input_value}")  # Debugging: Periksa input_value
+# Inisialisasi variabel evaluasi
+total_searches = 0
+total_recommendations = 0
+successful_recommendations = 0
 
-    # Jika input_value ada sebagai nama makanan dalam similarity_data (pencocokan parsial)
-    matching_items = [name for name in similarity_data.columns if input_value in name.lower()]
-    
-    if matching_items:
-        print(f"Nama makanan yang cocok dengan '{input_value}': {matching_items}")  # Debugging
-        # Rekomendasi berdasarkan nama makanan
-        closest = matching_items  # Gunakan semua makanan yang cocok
-        closest_df = pd.DataFrame({'name': closest})  # Buat DataFrame dengan kolom 'name'
-        return closest_df.merge(items, on='name').head(k)
-    
-    # Jika input_value adalah C_Type yang ada dalam dataset (menggunakan pencocokan parsial)
-    elif any(input_value in ctype.lower() for ctype in items['c_type'].unique()):
-        # Filter dataset berdasarkan C_Type yang mengandung input_value
-        filtered_items = items[items['c_type'].str.contains(input_value, case=False, na=False)]
-        return filtered_items.head(k)
-    
+# Menyimpan data pencarian pengguna
+user_searches = []
+
+while True:
+    try:
+        total_searches = int(input("Masukkan jumlah pencarian yang Anda inginkan: ").strip())
+        if total_searches > 0:
+            break
+        else:
+            print("Jumlah pencarian harus lebih besar dari 0. Coba lagi.")
+    except ValueError:
+        print("Input tidak valid. Masukkan angka yang valid.")
+
+for _ in range(total_searches):
+    input_value = input("\nMasukkan nama makanan atau jenis makanan yang Anda suka: ").strip()
+    user_searches.append(input_value)  # Catat input pengguna
+    result = food_recommendations(input_value, k=10)
+
+    print(f"\n=== Hasil Rekomendasi dari '{input_value}' ===")
+    if isinstance(result, pd.DataFrame) and not result.empty:
+        print(result.to_string(index=False, justify='left'))
+        total_recommendations += len(result)  # Menambahkan jumlah rekomendasi yang ditemukan
+        successful_recommendations += 1  # Pencarian yang menghasilkan rekomendasi
     else:
-        # Jika input_value tidak ditemukan
-        available_names = ", ".join(items['name'].unique()[:5])  # Tampilkan 5 nama makanan
-        available_types = ", ".join(items['c_type'].unique()[:5])  # Tampilkan 5 jenis makanan
-        return (f"Tidak ada rekomendasi yang ditemukan untuk '{input_value}'.\n"
-                f"Coba masukkan salah satu nama berikut: {available_names}, atau salah satu jenis makanan berikut: {available_types}")
+        print(f"Maaf, tidak ada rekomendasi yang ditemukan untuk '{input_value}'.")
 
-# Mengambil input dari pengguna untuk mencari rekomendasi
-input_value = input("Masukkan nama makanan atau jenis makanan yang Anda suka: ").strip()
-result = food_recommendations(input_value, k=4)
 ```
 #### Cara Kerja
 
@@ -609,8 +611,8 @@ Berdasarkan hasil yang diperoleh, berikut adalah analisis perbandingan antara **
 **Total Pencarian:** 2  
 **Total Rekomendasi:** 8  
 **Pencarian dengan Rekomendasi:** 2  
-**Presisi:** 25.00%  
-**Akurasi:** 100.00%
+**Presisi:** 100.00%
+**Akurasi:** 25.00% 
 
 **Metrik Evaluasi:**
 
