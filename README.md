@@ -68,17 +68,60 @@ Dengan pendekatan **Content-Based Filtering** dan **Collaborative Filtering**, s
 Dataset yang digunakan dalam proyek ini terdiri dari dua tabel: **data makanan** dan **rating makanan**. Dataset makanan berisi informasi tentang berbagai hidangan, termasuk nama makanan, kategori (seperti "Healthy Food", "Snack", dll.), apakah makanan tersebut vegan atau non-vegan, serta deskripsi bahan-bahan yang digunakan. Dataset rating berisi penilaian yang diberikan oleh pengguna terhadap makanan, yang mencakup ID pengguna, ID makanan, dan nilai rating (1-10). Dataset ini dapat diunduh melalui.
 
 
-| Jenis      | Keterangan                                                                 |
-|------------|-----------------------------------------------------------------------------|
-| Title      | Food Recommendation System                                                             |
-| Source     | [Kaggle](https://www.kaggle.com/datasets/schemersays/food-recommendation-system)                  |
-| Maintainer | [schemersays](https://www.kaggle.com/schemersays)                                   |
-| License    | Unknown                  |
-| Visibility | Publik                                                                      |
-| Tags       | _Busines_ |
-| Usability  | 4.71                                                                      |
+### Detail Dataset
 
+| Jenis        | Keterangan                                                                 |
+|--------------|-----------------------------------------------------------------------------|
+| **Title**    | Food Recommendation System                                                  |
+| **Source**   | [Kaggle-Food Recommendation System](https://www.kaggle.com/datasets/schemersays/food-recommendation-system) (Langsung menuju ke dataset) |
+| **Maintainer**| [schemersays](https://www.kaggle.com/schemersays)                           |
+| **License**  | Unknown                                                                     |
+| **Visibility**| Publik                                                                      |
+| **Tags**     | _Business_                                                                  |
+| **Usability**| 4.71                                                                        |
 
+### Deskripsi Dataset:
+- **Title**: Menyebutkan judul dataset, yaitu "Food Recommendation System", yang berkaitan dengan sistem rekomendasi makanan.
+- **Source**: Dataset ini bersumber dari Kaggle, platform yang menyediakan berbagai dataset untuk analisis data.
+- **Maintainer**: Penyusun dataset ini adalah pengguna dengan nama *schemersays*.
+- **License**: Informasi lisensi tidak diketahui, sehingga perlu diperiksa di sumbernya.
+- **Visibility**: Dataset ini tersedia secara publik.
+- **Tags**: Menunjukkan bahwa dataset ini masuk dalam kategori _business_.
+- **Usability**: Rating kegunaan dataset ini adalah 4.71, menunjukkan bahwa dataset ini sangat berguna berdasarkan feedback pengguna Kaggle.
+
+---
+
+### Informasi Dataset
+
+#### Dataset `data`
+- **Jumlah Baris**: 400 baris
+- **Jumlah Kolom**: 5 kolom
+- **Deskripsi**: Dataset ini berisi informasi tentang berbagai makanan yang digunakan dalam sistem rekomendasi.
+- **Missing Values**: Tidak ada missing values yang ditemukan.
+- **Duplikat Data**: Tidak ada data duplikat.
+- **Outliers**: Tidak ada outliers yang terdeteksi.
+
+#### Dataset `rating`
+- **Jumlah Baris**: 512 baris
+- **Jumlah Kolom**: 3 kolom
+- **Deskripsi**: Dataset ini berisi rating atau umpan balik pengguna tentang berbagai makanan.
+- **Missing Values**: Terdapat 1 nilai yang hilang (missing value) pada dataset ini.
+- **Duplikat Data**: Tidak ada duplikat data.
+- **Outliers**: Tidak ada outliers yang terdeteksi.
+
+#### Sebaran Data
+
+#### 1. Jumlah Data 
+![Jumlah Data](https://github.com/Primadya/sistemrekomendasidicoding/blob/main/image/jumlah%20data.png?raw=true)
+
+#### 2. Missing Value
+![Missing Value](https://github.com/Primadya/sistemrekomendasidicoding/blob/main/image/missingvalue.png?raw=true)
+
+#### 3. Outlier
+![Outlier](https://github.com/Primadya/sistemrekomendasidicoding/blob/main/image/outlier.png?raw=true)
+
+#### 4. Duplikasi Data
+![Duplikasi Data](https://github.com/Primadya/sistemrekomendasidicoding/blob/main/image/duplikat%20data.png?raw=true)
 
 ### Deskripsi Variabel
 
