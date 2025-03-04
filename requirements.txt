@@ -3,3 +3,4 @@ Pandas==2.2.3
 Numpy==2.0.2
 Matplotlib==3.9.2
 Seaborn==0.13.2
+joblib==1.4.2 
