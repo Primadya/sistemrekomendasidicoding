@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 import joblib
+import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 
@@ -40,36 +40,7 @@ st.dataframe(data.head(10))
 st.write("### Dataset Rating")
 st.dataframe(rating.head(10))
 
-# Menampilkan grafik jumlah makanan per tipe (gunakan plotly)
-st.write("### Grafik Jumlah Makanan per Tipe")
-fig1 = px.bar(data_frame=data, x='c_type', title="Jumlah Makanan per Tipe")
-st.plotly_chart(fig1)
-
-# Menampilkan grafik jumlah makanan per kategori vegetarian/non-vegetarian
-st.write("### Grafik Jumlah Makanan Vegetarian/Non-Vegetarian")
-fig2 = px.bar(data_frame=data, x='veg_non', title="Jumlah Makanan Vegetarian/Non-Vegetarian")
-st.plotly_chart(fig2)
-
-# Menampilkan grafik jumlah kemunculan rating
-st.write("### Grafik Jumlah Rating Makanan")
-fig3 = px.histogram(rating, x='rating', title="Jumlah Rating Makanan")
-st.plotly_chart(fig3)
-
-# Menampilkan cosine similarity matrix
-st.write("### Cosine Similarity Matrix (Beberapa Contoh)")
-st.dataframe(cosine_sim_df.head())
-
-# Menampilkan grafik evaluasi model (RMSE)
-st.write("### Grafik Evaluasi Model Collaborative Filtering")
-fig4 = px.line(
-    x=range(len(training_history['root_mean_squared_error'])),
-    y=[training_history['root_mean_squared_error'], training_history['val_root_mean_squared_error']],
-    labels={'x': 'Epoch', 'y': 'RMSE'},
-    title="Model Evaluation - RMSE"
-)
-st.plotly_chart(fig4)
-
-# Fungsi untuk memberikan rekomendasi makanan
+# Fungsi untuk memberikan rekomendasi makanan berdasarkan cosine similarity
 def food_recommendations(input_value, k=4):
     input_value = input_value.strip().lower()
 
