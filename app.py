@@ -84,4 +84,5 @@ if st.button('Dapatkan Rekomendasi Makanan dengan Collaborative Filtering'):
     
     for food_id in recommended_food_ids:
         food_name = data[data['food_id'] == food_id]['name'].values[0]
-        st.write(f"Food: {food_name}")
+        food_type = data[data['food_id'] == food_id]['c_type'].values[0]  # Adding food type information
+        st.write(f"Food: {food_name}, Type: {food_type}")
