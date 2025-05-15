@@ -32,10 +32,10 @@ st.title("🍽️ Dashboard Rekomendasi Makanan")
 st.write("Menggunakan **TF-IDF** dan **Cosine Similarity** untuk memberikan rekomendasi makanan yang sesuai dengan selera Anda.")
 
 st.subheader("📊 Dataset Makanan")
-st.dataframe(data.head(10))
+st.dataframe(data)
 
 st.subheader("⭐ Dataset Rating")
-st.dataframe(rating.head(10))
+st.dataframe(rating)
 
 # ----------------------------
 # Fungsi Content-Based Filtering
