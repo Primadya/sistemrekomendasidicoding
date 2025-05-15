@@ -17,8 +17,8 @@ except Exception as e:
 # ----------------------------
 @st.cache_data
 def load_data():
-    data = pd.read_csv("dataset/food.csv")
-    rating = pd.read_csv("dataset/ratings.csv")
+    data = pd.read_csv("dataset/food/1662574418893344.csv")
+    rating = pd.read_csv("dataset/food/ratings.csv")
     data.columns = data.columns.str.lower()
     rating.columns = rating.columns.str.lower()
     return data, rating
