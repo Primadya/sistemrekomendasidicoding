@@ -12,6 +12,10 @@ import joblib
 class RecommenderNet(tf.keras.Model):
     def __init__(self, num_users, num_food, embedding_size=50, **kwargs):
         super(RecommenderNet, self).__init__(**kwargs)
+        self.num_users = num_users
+        self.num_food = num_food
+        self.embedding_size = embedding_size
+
         self.user_embedding = tf.keras.layers.Embedding(
             num_users, embedding_size, embeddings_initializer="he_normal",
             embeddings_regularizer=tf.keras.regularizers.l2(1e-6)
@@ -32,6 +36,24 @@ class RecommenderNet(tf.keras.Model):
         x = dot_product + user_bias + food_bias
         return x
 
+    def get_config(self):
+        config = super().get_config()
+        config.update({
+            "num_users": self.num_users,
+            "num_food": self.num_food,
+            "embedding_size": self.embedding_size
+        })
+        return config
+
+    @classmethod
+    def from_config(cls, config):
+        return cls(
+            num_users=config["num_users"],
+            num_food=config["num_food"],
+            embedding_size=config.get("embedding_size", 50)
+        )
+
+
 # ----------------------------
 # Load Model dan Objek
 # ----------------------------
@@ -47,7 +69,7 @@ except Exception as e:
 try:
     get_custom_objects().update({'RecommenderNet': RecommenderNet})
     with tf.keras.utils.custom_object_scope({'RecommenderNet': RecommenderNet}):
-        model = load_model("recommender.h5")
+        model = load_model("recommendernew.h5")
 except Exception as e:
     st.error(f"❌ Gagal memuat model Collaborative Filtering: {e}")
     model = None
